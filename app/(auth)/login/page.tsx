@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export default function Login() {
   return (
-    <div className="flex items-center justify-center h-full">
+    <div className="flex items-center justify-center min-h-screen">
       <LoginPage />
     </div>
   );
@@ -19,7 +19,7 @@ export default function Login() {
 export function LoginPage({ next }: { next?: string }) {
   return (
     <main className="max-w-sm p-5">
-      <h1 className="text-xl font-bold mb-4 text-gray-800">Login</h1>
+      <h1 className="text-2xl font-bold mb-4 text-gray-800">Login</h1>
       <SignInForm next={next} />
       {/* TODO: IMPLEMENT FORGOT PASSWORD FLOW */}
       {/* <div className="mt-3">
@@ -28,7 +28,7 @@ export function LoginPage({ next }: { next?: string }) {
         </span>
       </div> */}
       <div className="mt-3">
-        <span>
+        <span className="text-sm">
           Don&apos;t have an account?{" "}
           <Link href="/signup" className="underline">
             Sign Up

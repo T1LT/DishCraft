@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export default function SignUp() {
   return (
-    <div className="flex items-center justify-center h-full">
+    <div className="flex items-center justify-center min-h-screen">
       <SignUpPage />
     </div>
   );
@@ -19,10 +19,10 @@ export default function SignUp() {
 export function SignUpPage({ next }: { next?: string }) {
   return (
     <main className="max-w-sm p-5">
-      <h2 className="text-xl font-bold mb-4 text-gray-800">Create Account</h2>
+      <h2 className="text-2xl font-bold mb-4 text-gray-800">Create Account</h2>
       <SignUpForm next={next} />
       <div className="mt-3">
-        <span>
+        <span className="text-sm">
           Already have an account?{" "}
           <Link href="/login" className="underline">
             Login
