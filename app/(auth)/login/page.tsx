@@ -19,7 +19,7 @@ export default function Login() {
 export function LoginPage({ next }: { next?: string }) {
   return (
     <main className="max-w-sm p-5">
-      <h1 className="text-xl font-semibold mb-4 text-gray-800">Login</h1>
+      <h1 className="text-xl font-bold mb-4 text-gray-800">Login</h1>
       <SignInForm next={next} />
       {/* TODO: IMPLEMENT FORGOT PASSWORD FLOW */}
       {/* <div className="mt-3">
@@ -29,7 +29,7 @@ export function LoginPage({ next }: { next?: string }) {
       </div> */}
       <div className="mt-3">
         <span>
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link href="/signup" className="underline">
             Sign Up
           </Link>
