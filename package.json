@@ -19,6 +19,8 @@
     "clsx": "^2.1.0",
     "drizzle-orm": "^0.29.3",
     "lucide-react": "^0.309.0",
+    "nanoid": "^5.0.4",
+    "nanoid-dictionary": "^4.3.0",
     "next": "^14.0.5-canary.56",
     "react": "^18",
     "react-dom": "^18",
@@ -26,6 +28,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@types/nanoid-dictionary": "^4.2.3",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
