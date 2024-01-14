@@ -9,7 +9,7 @@ if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) {
 
 const redis = new Redis({
   url: process.env.KV_REST_API_URL,
-  token: process.env.KV_REST_API_token,
+  token: process.env.KV_REST_API_TOKEN,
 });
 
 export const authRateLimit = new Ratelimit({
