@@ -30,8 +30,7 @@ export default async function AddRecipe() {
   }
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4 text-gray-800">Add a Recipe</h1>
+    <div className="w-full flex justify-center py-12">
       <RecipeForm />
     </div>
   );

@@ -11,7 +11,10 @@ export default function RecipeForm() {
   const [state, formAction] = useFormState(submitRecipe, {});
 
   return (
-    <form action={formAction} className="max-w-2xl">
+    <form action={formAction} className="w-full max-w-md px-4 sm:px-0">
+      <h1 className="text-center text-2xl font-bold mb-4 text-gray-800">
+        Add a Recipe
+      </h1>
       <RecipeFormFields {...state} />
     </form>
   );
@@ -22,16 +25,15 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
 
   return (
     <div className="space-y-4 py-1">
-      <div className="flex flex-col flex-grow sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 items-start md:items-center">
+      <div className="flex flex-col flex-grow space-y-2 items-start">
         <label
-          className="block text-sm font-medium text-gray-700 md:w-16 md:text-right"
+          className="block text-sm font-medium text-gray-700"
           htmlFor="title"
         >
           Title
         </label>
         <Input
           id="title"
-          className="text-base bg-white"
           name="title"
           autoFocus
           disabled={pending}
@@ -45,9 +47,9 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
       error.fieldErrors.title != null ? (
         <ErrorMessage errors={error.fieldErrors.title} />
       ) : null}
-      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 items-start md:items-center">
+      <div className="flex flex-col space-y-2 items-start">
         <label
-          className="block text-sm font-medium text-gray-700 md:w-16 md:text-right"
+          className="block text-sm font-medium text-gray-700"
           htmlFor="cuisine"
         >
           Cuisine
@@ -56,7 +58,6 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
           id="cuisine"
           name="cuisine"
           disabled={pending}
-          className="text-base bg-white"
           placeholder="Enter Cuisine"
           type="text"
         />
@@ -67,9 +68,9 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
       error.fieldErrors.cuisine != null ? (
         <ErrorMessage errors={error.fieldErrors.cuisine} />
       ) : null}
-      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 items-start md:items-center">
+      <div className="flex flex-col space-y-2 items-start">
         <label
-          className="block text-sm font-medium text-gray-700 md:w-16 md:text-right"
+          className="block text-sm font-medium text-gray-700"
           htmlFor="category"
         >
           Category
@@ -78,7 +79,6 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
           id="category"
           name="category"
           disabled={pending}
-          className="text-base bg-white"
           placeholder="Enter Category"
           type="text"
         />
@@ -89,9 +89,9 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
       error.fieldErrors.category != null ? (
         <ErrorMessage errors={error.fieldErrors.category} />
       ) : null}
-      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 items-start md:items-center">
+      <div className="flex flex-col space-y-2 items-start">
         <label
-          className="block text-sm font-medium text-gray-700 md:w-16 md:text-right"
+          className="block text-sm font-medium text-gray-700"
           htmlFor="image"
         >
           Image
@@ -100,7 +100,6 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
           id="image"
           name="image"
           disabled={pending}
-          className="text-base bg-white"
           type="file"
           required
         />
@@ -111,9 +110,9 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
       error.fieldErrors.image != null ? (
         <ErrorMessage errors={error.fieldErrors.image} />
       ) : null}
-      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 items-start md:items-center">
+      <div className="flex flex-col space-y-2 items-start">
         <label
-          className="block text-sm font-medium text-gray-700 md:w-16 md:text-right"
+          className="block text-sm font-medium text-gray-700"
           htmlFor="prepTime"
         >
           Prep Time (min)
@@ -122,7 +121,6 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
           id="prepTime"
           name="prepTime"
           disabled={pending}
-          className="text-base bg-white"
           placeholder="Enter Prep Time"
           type="number"
         />
@@ -133,9 +131,9 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
       error.fieldErrors.prepTime != null ? (
         <ErrorMessage errors={error.fieldErrors.prepTime} />
       ) : null}
-      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 items-start">
+      <div className="flex flex-col space-y-2 items-start">
         <label
-          className="block text-sm font-medium text-gray-700 md:pt-2 md:w-16 md:text-right"
+          className="block text-sm font-medium text-gray-700"
           htmlFor="ingredients"
         >
           Ingredients
@@ -143,7 +141,6 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
         <Textarea
           id="ingredients"
           name="ingredients"
-          className="text-base bg-white"
           disabled={pending}
           placeholder="Enter Ingredients"
           rows={4}
@@ -155,9 +152,9 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
       error.fieldErrors.ingredients != null ? (
         <ErrorMessage errors={error.fieldErrors.ingredients} />
       ) : null}
-      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 items-start">
+      <div className="flex flex-col space-y-2 items-start">
         <label
-          className="block text-sm font-medium text-gray-700 md:pt-2 md:w-16 md:text-right"
+          className="block text-sm font-medium text-gray-700"
           htmlFor="procedure"
         >
           Procedure
@@ -165,7 +162,6 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
         <Textarea
           id="procedure"
           name="procedure"
-          className="text-base bg-white"
           disabled={pending}
           placeholder="Enter Procedure"
           onKeyDown={(e) => {
@@ -186,10 +182,10 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
       error.fieldErrors.procedure != null ? (
         <ErrorMessage errors={error.fieldErrors.procedure} />
       ) : null}
-      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 items-start">
+      <div className="flex flex-col space-y-2 items-start">
         <div className="w-16" />
-        <div className="mt-1 w-full">
-          <Button className="p-0 h-8 px-4" disabled={pending}>
+        <div className="mt-1 w-full flex justify-center">
+          <Button disabled={pending}>
             {pending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
             Submit
           </Button>
