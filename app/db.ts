@@ -56,6 +56,7 @@ export const recipesTable = pgTable(
     image_url: varchar("image_url", { length: 256 }),
     cuisine: varchar("cuisine", { length: 256 }).notNull(),
     category: varchar("category", { length: 256 }).notNull(),
+    prepTime: integer("prepTime").notNull(),
     ingredients: text("ingredients"),
     procedure: text("procedure"),
     username: varchar("username", { length: 256 }),
