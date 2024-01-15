@@ -102,6 +102,7 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
           disabled={pending}
           className="text-base bg-white"
           type="file"
+          required
         />
       </div>
       {!pending &&
