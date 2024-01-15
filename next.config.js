@@ -13,6 +13,13 @@ const nextConfig = {
   },
 
   swcMinify: true,
-}
 
-module.exports = nextConfig
+  rewrites: () => [
+    {
+      source: "/recipes",
+      destination: "/recipes?filter=all",
+    },
+  ],
+};
+
+module.exports = nextConfig;

@@ -50,7 +50,7 @@ export async function AddLink() {
 
   return (
     <Link
-      href={session?.user?.id ? "/addrecipe" : "/login/next/addrecipe"}
+      href={session?.user?.id ? "/add-recipe" : "/login/next/add-recipe"}
       className="hover:underline underline-offset-4 flex gap-1"
     >
       Add <span className="block lg:hidden">a Recipe</span>

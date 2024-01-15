@@ -21,7 +21,15 @@ const UserSchema = z.object({
     .min(8)
     .max(256)
     .transform((v) => v.trim()),
-  next: z.enum(["/", "/recipes", "/addrecipe"]).optional().default("/"),
+  next: z
+    .enum([
+      "/",
+      "/recipes?filter=all",
+      "/recipes?filter=popular",
+      "/add-recipe",
+    ])
+    .optional()
+    .default("/"),
 });
 
 export type SignInActionData = {
