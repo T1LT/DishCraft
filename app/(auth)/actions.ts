@@ -1,6 +1,6 @@
 "use server";
 
-import { signIn } from "@/app/auth";
+import { signIn, signOut } from "@/app/auth";
 import { AuthError } from "next-auth";
 import z from "zod";
 import { db, usersTable, genUserId } from "@/app/db";
@@ -200,4 +200,9 @@ export async function signUpAction(
   }
 
   redirect(input.data.next);
+}
+
+export async function signOutAction() {
+  await signOut();
+  return {};
 }

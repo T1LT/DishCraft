@@ -108,7 +108,7 @@ function SignUpFormFields({ error }: SignUpActionData) {
       <div className="flex gap-2 items-center">
         <Button className="p-0 h-8 px-4" disabled={pending}>
           {pending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-          Create Account
+          Sign Up
         </Button>
         {error && "message" in error && !pending ? (
           <span className="text-red-500 text-sm"> {error.message}</span>

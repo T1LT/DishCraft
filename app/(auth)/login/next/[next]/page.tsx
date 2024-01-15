@@ -7,5 +7,9 @@ export default function Login({
   params: { next: string };
 }) {
   dynamic();
-  return <LoginPage next={`/${next}`} />;
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <LoginPage next={`/${next}`} />
+    </div>
+  );
 }

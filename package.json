@@ -16,6 +16,8 @@
   "dependencies": {
     "@auth/drizzle-adapter": "^0.3.14",
     "@neondatabase/serverless": "^0.7.2",
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
+    "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@upstash/ratelimit": "^1.0.0",
     "@upstash/redis": "^1.28.0",
