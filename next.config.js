@@ -20,6 +20,15 @@ const nextConfig = {
       destination: "/recipes?filter=all",
     },
   ],
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.public.blob.vercel-storage.com",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;
