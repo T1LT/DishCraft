@@ -12,9 +12,7 @@ export default function RecipeForm() {
 
   return (
     <form action={formAction} className="w-full max-w-md px-4 sm:px-0">
-      <h1 className="text-center text-2xl font-bold mb-4 text-gray-800">
-        Add a Recipe
-      </h1>
+      <h1 className="text-center text-3xl font-bold mb-4">Add a Recipe</h1>
       <RecipeFormFields {...state} />
     </form>
   );
