@@ -7,7 +7,7 @@ import { Loader2 } from "lucide-react";
 
 export function Logout({ type }: { type?: "dropdown" | undefined }) {
   return (
-    <form action={signOutAction}>
+    <form action={signOutAction} className="w-full flex justify-end">
       <LogoutButton type={type} />
     </form>
   );

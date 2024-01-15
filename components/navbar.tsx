@@ -15,14 +15,14 @@ import { AddLink, AuthNav, UsernameLabel } from "@/app/(auth)/auth-nav";
 export default function Navbar() {
   return (
     <div className="w-full px-4 flex justify-center sticky top-5 ">
-      <div className="z-10 max-w-5xl w-full py-4 px-6 flex items-center justify-between text-sm rounded-full backdrop-filter bg-white/40 backdrop-blur border">
-        <Link href="/">
+      <div className="z-10 max-w-5xl w-full py-4 px-6 grid grid-cols-6 place-items-center text-sm rounded-full backdrop-filter bg-white/40 backdrop-blur border">
+        <Link href="/" className="col-span-1 w-full flex justify-start">
           <div className="flex items-center gap-2">
             <Donut className="h-6 w-6" />
             <h1 className="text-2xl font-bold select-none">DishCraft</h1>
           </div>
         </Link>
-        <nav className="hidden lg:block">
+        <nav className="hidden lg:block lg:col-span-4">
           <ul className="flex space-x-4 sm:space-x-6 font-semibold">
             <li>
               <Link
@@ -60,7 +60,9 @@ export default function Navbar() {
         </nav>
         <Suspense
           fallback={
-            <Button className="rounded-full hidden lg:block">Log Out</Button>
+            <Button className="rounded-full hidden lg:block lg:col-span-1">
+              Log Out
+            </Button>
           }
         >
           <AuthNav />

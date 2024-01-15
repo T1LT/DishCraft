@@ -38,7 +38,10 @@ function LoggedOut({ type }: { type?: "dropdown" | undefined }) {
     );
   } else {
     return (
-      <Button asChild className="h-8 py-5 px-4 rounded-full hidden lg:flex">
+      <Button
+        asChild
+        className="h-8 py-5 px-4 rounded-full hidden lg:flex lg:col-span-1"
+      >
         <Link href="/login">Login</Link>
       </Button>
     );

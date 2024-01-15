@@ -29,9 +29,5 @@ export default async function AddRecipe() {
     redirect("/login");
   }
 
-  return (
-    <div className="w-full flex justify-center py-12">
-      <RecipeForm />
-    </div>
-  );
+  return <RecipeForm />;
 }
