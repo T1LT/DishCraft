@@ -82,26 +82,13 @@ export default function Navbar() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Link
-                href="/recipes?filter=all"
-                className="hover:underline w-full"
-              >
-                All Recipes
-              </Link>
+              <Link href="/recipes?filter=all">All Recipes</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link href="/recipes?filter=popular" className="hover:underline">
-                Popular Recipes
-              </Link>
+              <Link href="/recipes?filter=popular">Popular Recipes</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Suspense
-                fallback={
-                  <Link href="/add-recipe" className="hover:underline">
-                    Add a Recipe
-                  </Link>
-                }
-              >
+              <Suspense fallback={<Link href="/add-recipe">Add a Recipe</Link>}>
                 <AddLink />
               </Suspense>
             </DropdownMenuItem>
