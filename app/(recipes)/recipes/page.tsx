@@ -62,6 +62,7 @@ export default async function Recipes({
         <Link
           href={`/recipes/${recipe.id.replace(/^recipe_/, "")}`}
           className="hover:underline underline-offset-4"
+          key={recipe.id}
         >
           <h1>{recipe.title}</h1>
         </Link>
