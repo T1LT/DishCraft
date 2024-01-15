@@ -79,7 +79,7 @@ export default function Navbar() {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link href="/recipes" className="hover:underline">
+              <Link href="/popular" className="hover:underline">
                 Popular Recipes
               </Link>
             </DropdownMenuItem>
