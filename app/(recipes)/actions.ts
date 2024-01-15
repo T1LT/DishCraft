@@ -1,7 +1,7 @@
 "use server";
 
 import z from "zod";
-import { db, recipesTable, genRecipeId } from "@/app/db";
+import { db, recipesTable, genRecipeId, usersTable } from "@/app/db";
 import { auth } from "@/app/auth";
 import { redirect } from "next/navigation";
 import { newRecipeRateLimit } from "@/lib/rate-limit";
@@ -19,18 +19,14 @@ const SubmitRecipeSchema = z.object({
   title: z.string().min(3).max(80).trim(),
   cuisine: z.string().min(3).max(80).trim(),
   category: z.string().min(3).max(80).trim(),
-  prepTime: z.number(),
+  prepTime: z.coerce.number(),
   ingredients: z.string().max(5000).trim(),
   procedure: z.string().max(5000).trim(),
   image: z
     .any()
-    .refine((files) => files?.length == 1, "Image is required.")
+    .refine((file) => file?.size <= MAX_FILE_SIZE, `Max file size is 4MB.`)
     .refine(
-      (files) => files?.[0]?.size <= MAX_FILE_SIZE,
-      `Max file size is 4MB.`,
-    )
-    .refine(
-      (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
+      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
       ".jpg, .jpeg, .png and .webp files are accepted.",
     ),
 });
@@ -62,6 +58,15 @@ export async function submitRecipe(
   if (!session?.user?.id) redirect("/login");
 
   const userId = session.user.id;
+
+  const user = (
+    await db
+      .select({
+        id: usersTable.id,
+        username: usersTable.username,
+      })
+      .from(usersTable)
+  )[0];
 
   const input = SubmitRecipeSchema.safeParse({
     title: formData.get("title"),
@@ -114,6 +119,7 @@ export async function submitRecipe(
       image_url: blob.url as string,
       likes: 0,
       submitted_by: userId,
+      username: user.username,
     });
   } catch (err) {
     console.error(err);
