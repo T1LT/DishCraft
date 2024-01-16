@@ -8,7 +8,7 @@ export default function RecipesLayout({
   return (
     <>
       <Navbar />
-      <div className="w-full flex justify-center py-12">{children}</div>
+      <div className="w-full flex justify-center px-4 py-12">{children}</div>
     </>
   );
 }

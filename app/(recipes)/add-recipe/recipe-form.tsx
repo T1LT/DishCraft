@@ -11,7 +11,7 @@ export default function RecipeForm() {
   const [state, formAction] = useFormState(submitRecipe, {});
 
   return (
-    <form action={formAction} className="w-full max-w-md px-4 sm:px-0">
+    <form action={formAction} className="w-full max-w-md">
       <h1 className="text-center text-3xl font-bold mb-4">Add a Recipe</h1>
       <RecipeFormFields {...state} />
     </form>

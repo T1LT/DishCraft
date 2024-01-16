@@ -4,6 +4,7 @@ import { db, likesTable, recipesTable, usersTable } from "@/app/db";
 import { eq, sql } from "drizzle-orm";
 import Link from "next/link";
 import { cookies } from "next/headers";
+import RecipeCard from "@/components/recipe-card";
 
 async function getSubmittedRecipes(userId: string) {
   return await db
@@ -12,6 +13,7 @@ async function getSubmittedRecipes(userId: string) {
       title: recipesTable.title,
       cuisine: recipesTable.cuisine,
       category: recipesTable.category,
+      likes: recipesTable.likes,
     })
     .from(recipesTable)
     .where(eq(recipesTable.submitted_by, userId))
@@ -25,6 +27,7 @@ async function getLikedRecipes(userId: string) {
       title: recipesTable.title,
       cuisine: recipesTable.cuisine,
       category: recipesTable.category,
+      likes: recipesTable.likes,
     })
     .from(recipesTable)
     .where(eq(usersTable.id, userId))
@@ -67,12 +70,7 @@ export default async function UserPage() {
         <ul className="space-y-2">
           {submittedRecipes.map((recipe) => (
             <li key={recipe.id}>
-              <Link
-                href={`/recipes/${recipe.id.replace(/^recipe_/, "")}`}
-                className="hover:underline underline-offset-4"
-              >
-                {recipe.title}
-              </Link>
+              <RecipeCard recipe={recipe} />
             </li>
           ))}
         </ul>
@@ -82,12 +80,7 @@ export default async function UserPage() {
         <ul className="space-y-2">
           {likedRecipes.map((recipe) => (
             <li key={recipe.id}>
-              <Link
-                href={`/recipes/${recipe.id.replace(/^recipe_/, "")}`}
-                className="hover:underline underline-offset-4"
-              >
-                {recipe.title}
-              </Link>
+              <RecipeCard recipe={recipe} />
             </li>
           ))}
         </ul>

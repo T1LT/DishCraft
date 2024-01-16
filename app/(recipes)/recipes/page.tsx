@@ -1,4 +1,5 @@
 import { db, recipesTable } from "@/app/db";
+import RecipeCard from "@/components/recipe-card";
 import { capitalize } from "@/lib/utils";
 import { desc } from "drizzle-orm";
 import { nanoid } from "nanoid";
@@ -61,12 +62,7 @@ export default async function Recipes({
       <ul className="space-y-2">
         {recipes.map((recipe) => (
           <li key={recipe.id}>
-            <Link
-              href={`/recipes/${recipe.id.replace(/^recipe_/, "")}`}
-              className="hover:underline underline-offset-4"
-            >
-              <h1>{recipe.title}</h1>
-            </Link>
+            <RecipeCard recipe={recipe} />
           </li>
         ))}
       </ul>
