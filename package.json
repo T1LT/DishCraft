@@ -26,7 +26,6 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "drizzle-orm": "^0.29.3",
-    "geist": "^1.2.1",
     "lucide-react": "^0.309.0",
     "nanoid": "^5.0.4",
     "nanoid-dictionary": "^4.3.0",
