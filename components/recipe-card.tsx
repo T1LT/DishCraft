@@ -20,7 +20,7 @@ export default function RecipeCard({ recipe }: { recipe: ReducedRecipe }) {
           <span className="font-semibold text-gray-800 group-hover:text-black transition duration-300">
             {recipe.title}
           </span>
-          <ArrowRight className="h-4 w-4 text-gray-800 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform group-hover:text-black group-hover:dark:text-white" />
+          <ArrowRight className="h-4 w-4 text-gray-800 group-hover:translate-x-1 transition-transform group-hover:text-black group-hover:dark:text-white" />
         </div>
         <div className="text-gray-800 group-hover:text-black space-x-2 text-sm font-light">
           <span>{`${recipe.cuisine}`}</span>
