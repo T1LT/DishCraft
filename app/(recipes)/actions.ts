@@ -11,9 +11,9 @@ import {
 } from "@/app/db";
 import { auth } from "@/app/auth";
 import { redirect } from "next/navigation";
-import { newRecipeRateLimit } from "@/lib/rate-limit";
+import { likeRecipeRateLimit, newRecipeRateLimit } from "@/lib/rate-limit";
 import { put } from "@vercel/blob";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 const MAX_FILE_SIZE = 400000;
@@ -143,32 +143,60 @@ export async function submitRecipe(
   redirect(`/recipes/${id.replace(/^recipe_/, "")}`);
 }
 
-export async function addLike(recipeId: string, likes: number) {
+export async function changeLike(
+  recipeId: string,
+  likes: number,
+  userLiked: boolean,
+) {
   const session = await auth();
 
   if (!session?.user?.id) redirect("/login");
 
   const userId = session.user.id;
 
+  const rl = await likeRecipeRateLimit.limit(userId);
+
+  if (!rl.success) {
+    return {
+      error: {
+        code: "AUTH_ERROR",
+        message: "Too many attempts. Try again later.",
+      },
+    };
+  }
+
   try {
-    const id = genLikeId();
+    if (!userLiked) {
+      const id = genLikeId();
 
-    // add entry to likes table
-    await db
-      .insert(likesTable)
-      .values({ id, recipe_id: recipeId, user_id: userId });
+      // add entry to likes table
+      await db
+        .insert(likesTable)
+        .values({ id, recipe_id: recipeId, user_id: userId });
 
-    // update recipe likes column
-    await db
-      .update(recipesTable)
-      .set({ likes: likes + 1 })
-      .where(eq(recipesTable.id, recipeId));
+      // update recipe likes field
+      await db
+        .update(recipesTable)
+        .set({ likes: likes + 1 })
+        .where(eq(recipesTable.id, recipeId));
+    } else {
+      // remove entry from likes table
+      await db
+        .delete(likesTable)
+        .where(sql`user_id = ${userId} AND recipe_id = ${recipeId}`);
+
+      // update recipe likes field
+      await db
+        .update(recipesTable)
+        .set({ likes: likes - 1 })
+        .where(eq(recipesTable.id, recipeId));
+    }
   } catch (err) {
     console.error(err);
     return {
       error: {
         code: "INTERNAL_ERROR",
-        message: "Failed to like recipe. Please try again later.",
+        message: "Failed to like/unlike recipe. Please try again later.",
       },
     };
   }

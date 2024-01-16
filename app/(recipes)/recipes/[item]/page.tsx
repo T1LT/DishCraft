@@ -1,10 +1,11 @@
-import { db, recipesTable } from "@/app/db";
+import { db, likesTable, recipesTable } from "@/app/db";
 import { sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { headers } from "next/headers";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import LikeButton from "../like-button";
+import { auth } from "@/app/auth";
 
 async function getRecipe(id: string) {
   const recipeId = `recipe_${id}`;
@@ -14,6 +15,19 @@ async function getRecipe(id: string) {
       .from(recipesTable)
       .where(sql`id = ${recipeId}`)
   )[0];
+}
+
+async function getUserLiked(recipeId: string, userId: string | undefined) {
+  if (!userId) return false;
+
+  return (
+    (
+      await db
+        .select()
+        .from(likesTable)
+        .where(sql`user_id = ${userId} AND recipe_id = ${recipeId}`)
+    ).length === 1
+  );
 }
 
 export default async function RecipeItem({
@@ -28,6 +42,15 @@ export default async function RecipeItem({
   console.timeEnd(`fetch recipe ${params.item} (req: ${rid})`);
 
   if (!recipe) notFound();
+
+  const session = await auth();
+  let userLiked: boolean;
+
+  if (!session?.user?.id) userLiked = false;
+
+  const userId = session?.user?.id;
+
+  userLiked = await getUserLiked(recipe.id, userId);
 
   return (
     <div className="w-full max-w-xl space-y-8 px-8">
@@ -60,7 +83,11 @@ export default async function RecipeItem({
             {recipe.prepTime} min
           </p>
         </div>
-        <LikeButton likes={recipe.likes} recipeId={recipe.id} />
+        <LikeButton
+          likes={recipe.likes}
+          recipeId={recipe.id}
+          userLiked={userLiked}
+        />
       </div>
       <div>
         <h3 className="font-bold text-xl">Ingredients</h3>
