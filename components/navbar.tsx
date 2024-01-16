@@ -10,12 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  AddLink,
-  AuthNav,
-  UserPageLink,
-  UsernameLabel,
-} from "@/app/(auth)/auth-nav";
+import { AddLink, AuthNav, UsernameLabel } from "@/app/(auth)/auth-nav";
 
 export default function Navbar() {
   return (
@@ -66,24 +61,15 @@ export default function Navbar() {
             </li>
             <li className="font-light select-none">|</li>
             <li>
-              <Suspense
-                fallback={
-                  <Link
-                    href="/user"
-                    className="hover:underline underline-offset-4"
-                  >
-                    User
-                  </Link>
-                }
-              >
-                <UserPageLink />
-              </Suspense>
+              <Link href="/user" className="hover:underline underline-offset-4">
+                User Page
+              </Link>
             </li>
           </ul>
         </nav>
         <Suspense
           fallback={
-            <Button className="rounded-full hidden lg:block lg:col-span-1">
+            <Button className="h-8 py-5 px-4 rounded-full hidden lg:flex lg:col-span-1">
               Log Out
             </Button>
           }
@@ -122,6 +108,11 @@ export default function Navbar() {
               >
                 <AddLink />
               </Suspense>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href="/user" className="w-full">
+                User Page
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
