@@ -1,7 +1,35 @@
 import { auth } from "@/app/auth";
 import { redirect } from "next/navigation";
-import { db, usersTable } from "@/app/db";
-import { sql } from "drizzle-orm";
+import { db, likesTable, recipesTable, usersTable } from "@/app/db";
+import { eq, sql } from "drizzle-orm";
+import Link from "next/link";
+
+async function getSubmittedRecipes(userId: string) {
+  return await db
+    .select({
+      id: recipesTable.id,
+      title: recipesTable.title,
+      cuisine: recipesTable.cuisine,
+      category: recipesTable.category,
+    })
+    .from(recipesTable)
+    .where(eq(recipesTable.submitted_by, userId))
+    .innerJoin(usersTable, eq(recipesTable.submitted_by, usersTable.id));
+}
+
+async function getLikedRecipes(userId: string) {
+  return await db
+    .select({
+      id: recipesTable.id,
+      title: recipesTable.title,
+      cuisine: recipesTable.cuisine,
+      category: recipesTable.category,
+    })
+    .from(recipesTable)
+    .where(eq(usersTable.id, userId))
+    .innerJoin(likesTable, eq(recipesTable.id, likesTable.recipe_id))
+    .innerJoin(usersTable, eq(usersTable.id, likesTable.user_id));
+}
 
 export default async function UserPage() {
   const session = await auth();
@@ -18,5 +46,43 @@ export default async function UserPage() {
 
   if (!user) redirect("/login/next/user");
 
-  return <div>{user.username}</div>;
+  const submittedRecipes = await getSubmittedRecipes(user.id);
+  const likedRecipes = await getLikedRecipes(user.id);
+
+  return (
+    <div className="w-full max-w-lg">
+      <h1 className="font-bold text-3xl text-center">User Page</h1>
+      <p>{user.username}</p>
+      <div>
+        <h2 className="font-semibold text-lg">Submitted Recipes</h2>
+        <ul>
+          {submittedRecipes.map((recipe) => (
+            <li key={recipe.id}>
+              <Link
+                href={`/recipes/${recipe.id.replace(/^recipe_/, "")}`}
+                className="hover:underline underline-offset-4"
+              >
+                {recipe.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2 className="font-semibold text-lg">Liked Recipes</h2>
+        <ul>
+          {likedRecipes.map((recipe) => (
+            <li key={recipe.id}>
+              <Link
+                href={`/recipes/${recipe.id.replace(/^recipe_/, "")}`}
+                className="hover:underline underline-offset-4"
+              >
+                {recipe.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
 }
