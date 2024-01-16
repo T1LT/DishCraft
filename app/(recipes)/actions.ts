@@ -1,11 +1,20 @@
 "use server";
 
 import z from "zod";
-import { db, recipesTable, genRecipeId, usersTable } from "@/app/db";
+import {
+  db,
+  recipesTable,
+  genRecipeId,
+  usersTable,
+  likesTable,
+  genLikeId,
+} from "@/app/db";
 import { auth } from "@/app/auth";
 import { redirect } from "next/navigation";
 import { newRecipeRateLimit } from "@/lib/rate-limit";
 import { put } from "@vercel/blob";
+import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 
 const MAX_FILE_SIZE = 400000;
 const ACCEPTED_IMAGE_TYPES = [
@@ -132,4 +141,37 @@ export async function submitRecipe(
   }
 
   redirect(`/recipes/${id.replace(/^recipe_/, "")}`);
+}
+
+export async function addLike(recipeId: string, likes: number) {
+  const session = await auth();
+
+  if (!session?.user?.id) redirect("/login");
+
+  const userId = session.user.id;
+
+  try {
+    const id = genLikeId();
+
+    // add entry to likes table
+    await db
+      .insert(likesTable)
+      .values({ id, recipe_id: recipeId, user_id: userId });
+
+    // update recipe likes column
+    await db
+      .update(recipesTable)
+      .set({ likes: likes + 1 })
+      .where(eq(recipesTable.id, recipeId));
+  } catch (err) {
+    console.error(err);
+    return {
+      error: {
+        code: "INTERNAL_ERROR",
+        message: "Failed to like recipe. Please try again later.",
+      },
+    };
+  }
+
+  revalidatePath(`/recipes/${recipeId.replace(/^recipe_/, "")}`);
 }

@@ -7,6 +7,7 @@ import {
   integer,
   varchar,
   timestamp,
+  unique,
 } from "drizzle-orm/pg-core";
 import { customAlphabet } from "nanoid";
 import { nolookalikes } from "nanoid-dictionary";
@@ -83,16 +84,22 @@ export const genRecipeId = () => {
   return `recipe_${nanoid(12)}`;
 };
 
-export const likesTable = pgTable("likes", {
-  id: varchar("id", { length: 256 }).primaryKey().notNull(),
-  recipe_id: varchar("recipe_id", { length: 256 })
-    .notNull()
-    .references(() => recipesTable.id),
-  user_id: varchar("user_id", { length: 256 })
-    .notNull()
-    .references(() => usersTable.id),
-});
+export const likesTable = pgTable(
+  "likes",
+  {
+    id: varchar("id", { length: 256 }).primaryKey().notNull(),
+    recipe_id: varchar("recipe_id", { length: 256 })
+      .notNull()
+      .references(() => recipesTable.id),
+    user_id: varchar("user_id", { length: 256 })
+      .notNull()
+      .references(() => usersTable.id),
+  },
+  (t) => ({
+    unq: unique().on(t.recipe_id, t.user_id),
+  }),
+);
 
 export const genLikeId = () => {
-  return `comment_${nanoid(12)}`;
+  return `like_${nanoid(12)}`;
 };

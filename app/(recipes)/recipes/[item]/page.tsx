@@ -1,10 +1,10 @@
 import { db, recipesTable } from "@/app/db";
 import { sql } from "drizzle-orm";
-import { Heart } from "lucide-react";
 import { nanoid } from "nanoid";
 import { headers } from "next/headers";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import LikeButton from "../like-button";
 
 async function getRecipe(id: string) {
   const recipeId = `recipe_${id}`;
@@ -45,7 +45,7 @@ export default async function RecipeItem({
           />
         )}
       </div>
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <div className="flex flex-col space-y-2">
           <p className="flex gap-1">
             <span className="font-bold">Cuisine:</span>
@@ -60,10 +60,7 @@ export default async function RecipeItem({
             {recipe.prepTime} min
           </p>
         </div>
-        <p className="flex items-center gap-1">
-          <Heart className="h-6 w-6" />
-          {recipe.likes}
-        </p>
+        <LikeButton likes={recipe.likes} recipeId={recipe.id} />
       </div>
       <div>
         <h3 className="font-bold text-xl">Ingredients</h3>
