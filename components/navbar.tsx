@@ -62,7 +62,7 @@ export default function Navbar() {
             <li className="font-light select-none">|</li>
             <li>
               <Link href="/user" className="hover:underline underline-offset-4">
-                User Page
+                User
               </Link>
             </li>
           </ul>
