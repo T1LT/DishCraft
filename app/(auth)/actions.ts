@@ -27,6 +27,7 @@ const UserSchema = z.object({
       "/recipes?filter=all",
       "/recipes?filter=popular",
       "/add-recipe",
+      "/user",
     ])
     .optional()
     .default("/"),

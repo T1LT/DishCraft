@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { db, likesTable, recipesTable, usersTable } from "@/app/db";
 import { eq, sql } from "drizzle-orm";
 import Link from "next/link";
+import { cookies } from "next/headers";
 
 async function getSubmittedRecipes(userId: string) {
   return await db
@@ -32,9 +33,17 @@ async function getLikedRecipes(userId: string) {
 }
 
 export default async function UserPage() {
+  const cookieJar = cookies();
+
+  if (!cookieJar.getAll().length) {
+    redirect("/login/next/add-recipe");
+  }
+
   const session = await auth();
 
-  if (!session?.user?.id) redirect("/login/next/user");
+  if (!session?.user?.id) {
+    return redirect("/login/next/user");
+  }
 
   const user = (
     await db
@@ -44,7 +53,7 @@ export default async function UserPage() {
       .limit(1)
   )[0];
 
-  if (!user) redirect("/login/next/user");
+  if (!user) redirect("/login");
 
   const submittedRecipes = await getSubmittedRecipes(user.id);
   const likedRecipes = await getLikedRecipes(user.id);
