@@ -54,19 +54,23 @@ export default async function Recipes({
   if (!recipes || !recipes.length) return <h1>No recipes found!</h1>;
 
   return (
-    <div className="w-full max-w-lg">
+    <div className="w-full max-w-lg space-y-4">
       <h1 className="font-bold text-3xl text-center">
         {capitalize(filter)} Recipes
       </h1>
-      {recipes.map((recipe) => (
-        <Link
-          href={`/recipes/${recipe.id.replace(/^recipe_/, "")}`}
-          className="hover:underline underline-offset-4"
-          key={recipe.id}
-        >
-          <h1>{recipe.title}</h1>
-        </Link>
-      ))}
+      <ul className="space-y-2">
+        {recipes.map((recipe) => (
+          <li>
+            <Link
+              href={`/recipes/${recipe.id.replace(/^recipe_/, "")}`}
+              className="hover:underline underline-offset-4"
+              key={recipe.id}
+            >
+              <h1>{recipe.title}</h1>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

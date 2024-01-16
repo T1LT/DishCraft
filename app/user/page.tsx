@@ -59,12 +59,12 @@ export default async function UserPage() {
   const likedRecipes = await getLikedRecipes(user.id);
 
   return (
-    <div className="w-full max-w-lg flex flex-col space-y-4">
+    <div className="w-full max-w-lg space-y-4">
       <h1 className="font-bold text-3xl text-center">User Page</h1>
-      <h2 className="font-bold text-xl">{user.username}</h2>
+      <h2 className="font-bold text-2xl">{user.username}</h2>
       <div>
         <h2 className="font-bold text-xl mb-2">Submitted Recipes</h2>
-        <ul className="flex flex-col space-y-2">
+        <ul className="space-y-2">
           {submittedRecipes.map((recipe) => (
             <li key={recipe.id}>
               <Link
@@ -79,7 +79,7 @@ export default async function UserPage() {
       </div>
       <div>
         <h2 className="font-bold text-xl mb-2">Liked Recipes</h2>
-        <ul className="flex flex-col space-y-2">
+        <ul className="space-y-2">
           {likedRecipes.map((recipe) => (
             <li key={recipe.id}>
               <Link
