@@ -78,3 +78,39 @@ export async function UsernameLabel() {
 
   return <h1>Hello {user.username}!</h1>;
 }
+
+export async function UserPageLink() {
+  const session = await auth();
+
+  if (!session?.user?.id) return <LoggedOutUserPageLink />;
+
+  const user = (
+    await db
+      .select({ username: usersTable.username })
+      .from(usersTable)
+      .where(sql`${usersTable.id} = ${session.user.id}`)
+      .limit(1)
+  )[0];
+
+  if (!user) {
+    console.error("user not found in db, invalid session", session);
+    return <LoggedOutUserPageLink />;
+  }
+
+  return (
+    <Link href="/user" className="hover:underline underline-offset-4">
+      {user.username}
+    </Link>
+  );
+}
+
+function LoggedOutUserPageLink() {
+  return (
+    <Link
+      href="/login/next/user"
+      className="hover:underline underline-offset-4"
+    >
+      User Page
+    </Link>
+  );
+}

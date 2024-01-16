@@ -50,7 +50,7 @@ export async function signInAction(
     return {
       error: {
         code: "AUTH_ERROR",
-        message: "Too many attempts. Try again later",
+        message: "Too many attempts. Try again later.",
       },
     };
   }
@@ -127,7 +127,7 @@ export async function signUpAction(
     return {
       error: {
         code: "AUTH_ERROR",
-        message: "Too many attempts. Try again later",
+        message: "Too many attempts. Try again later.",
       },
     };
   }

@@ -105,7 +105,7 @@ function SignUpFormFields({ error }: SignUpActionData) {
           </div>
         ) : null}
       </div>
-      <div className="flex gap-2 items-center">
+      <div className="flex flex-col gap-3 items-start">
         <Button className="p-0 h-8 px-4" disabled={pending}>
           {pending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
           Sign Up
