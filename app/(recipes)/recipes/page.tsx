@@ -60,11 +60,10 @@ export default async function Recipes({
       </h1>
       <ul className="space-y-2">
         {recipes.map((recipe) => (
-          <li>
+          <li key={recipe.id}>
             <Link
               href={`/recipes/${recipe.id.replace(/^recipe_/, "")}`}
               className="hover:underline underline-offset-4"
-              key={recipe.id}
             >
               <h1>{recipe.title}</h1>
             </Link>
