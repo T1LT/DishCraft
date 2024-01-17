@@ -28,7 +28,7 @@ export default function RecipeCard({ recipe }: { recipe: ReducedRecipe }) {
           <span className="text-xs select-none">|</span>
           <span>{`${recipe.category}`}</span>
           <span className="text-xs select-none">|</span>
-          <span>{`${recipe.likes} likes`}</span>
+          <span>{`${recipe.likes} like${recipe.likes === 1 ? "" : "s"}`}</span>
         </div>
       </div>
     </Link>
