@@ -13,6 +13,7 @@ export default function RecipeCard({ recipe }: { recipe: ReducedRecipe }) {
   return (
     <Link
       href={`/recipes/${recipe.id.replace(/^recipe_/, "")}`}
+      prefetch={true}
       className="flex flex-col items-center"
     >
       <div className="w-full px-4 py-4 flex flex-col items-start gap-2 group rounded-md hover:bg-neutral-100/75 transition">

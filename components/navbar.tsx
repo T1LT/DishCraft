@@ -26,10 +26,11 @@ export default function Navbar() {
           </div>
         </Link>
         <nav className="hidden col-span-1 lg:block lg:col-span-4">
-          <ul className="flex space-x-4 sm:space-x-6 font-semibold">
+          <ul className="flex space-x-4 sm:space-x-6 font-semibold text-base">
             <li>
               <Link
                 href="/recipes?filter=all"
+                prefetch={true}
                 className="hover:underline underline-offset-4"
               >
                 All
@@ -39,6 +40,7 @@ export default function Navbar() {
             <li>
               <Link
                 href="/recipes?filter=popular"
+                prefetch={true}
                 className="hover:underline underline-offset-4"
               >
                 Popular
@@ -61,8 +63,12 @@ export default function Navbar() {
             </li>
             <li className="font-light select-none">|</li>
             <li>
-              <Link href="/user" className="hover:underline underline-offset-4">
-                User
+              <Link
+                href="/user"
+                prefetch={true}
+                className="hover:underline underline-offset-4"
+              >
+                Me
               </Link>
             </li>
           </ul>
@@ -89,12 +95,20 @@ export default function Navbar() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Link href="/recipes?filter=all" className="w-full">
+              <Link
+                href="/recipes?filter=all"
+                prefetch={true}
+                className="w-full"
+              >
                 All Recipes
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link href="/recipes?filter=popular" className="w-full">
+              <Link
+                href="/recipes?filter=popular"
+                prefetch={true}
+                className="w-full"
+              >
                 Popular Recipes
               </Link>
             </DropdownMenuItem>
@@ -110,8 +124,8 @@ export default function Navbar() {
               </Suspense>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link href="/user" className="w-full">
-                User Page
+              <Link href="/user" prefetch={true} className="w-full">
+                My Page
               </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />

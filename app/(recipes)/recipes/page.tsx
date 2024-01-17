@@ -4,7 +4,6 @@ import { capitalize } from "@/lib/utils";
 import { desc } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { headers } from "next/headers";
-import Link from "next/link";
 
 async function getRecipes(filter: string) {
   if (!filter || filter === "all") {
@@ -44,8 +43,6 @@ export default async function Recipes({
 }: {
   searchParams?: { [key: string]: string | undefined };
 }) {
-  headers();
-
   const { filter: filter } = searchParams as { [key: string]: string };
 
   const rid = headers().get("x-vercel-id") ?? nanoid();
