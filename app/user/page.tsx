@@ -2,8 +2,7 @@ import { auth } from "@/app/auth";
 import { redirect } from "next/navigation";
 import { db, likesTable, recipesTable, usersTable } from "@/app/db";
 import { eq, sql } from "drizzle-orm";
-import Link from "next/link";
-import { cookies } from "next/headers";
+import { cookies, headers as dynamic } from "next/headers";
 import RecipeCard from "@/components/recipe-card";
 
 async function getSubmittedRecipes(userId: string) {
@@ -36,6 +35,8 @@ async function getLikedRecipes(userId: string) {
 }
 
 export default async function UserPage() {
+  dynamic();
+
   const cookieJar = cookies();
 
   if (!cookieJar.getAll().length) {

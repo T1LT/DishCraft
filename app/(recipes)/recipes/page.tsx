@@ -44,6 +44,8 @@ export default async function Recipes({
 }: {
   searchParams?: { [key: string]: string | undefined };
 }) {
+  headers();
+
   const { filter: filter } = searchParams as { [key: string]: string };
 
   const rid = headers().get("x-vercel-id") ?? nanoid();
