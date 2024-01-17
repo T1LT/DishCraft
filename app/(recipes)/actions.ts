@@ -12,7 +12,7 @@ import {
 import { auth } from "@/app/auth";
 import { redirect } from "next/navigation";
 import { likeRecipeRateLimit, newRecipeRateLimit } from "@/lib/rate-limit";
-import { put } from "@vercel/blob";
+import { PutBlobResult, put } from "@vercel/blob";
 import { eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
@@ -35,9 +35,10 @@ const SubmitRecipeSchema = z.object({
     .any()
     .refine((file) => file?.size <= MAX_FILE_SIZE, `Max file size is 4MB.`)
     .refine(
-      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+      (file) => !file.size || ACCEPTED_IMAGE_TYPES.includes(file?.type),
       ".jpg, .jpeg, .png and .webp files are accepted.",
-    ),
+    )
+    .optional(),
 });
 
 export type SubmitRecipeData = {
@@ -113,9 +114,13 @@ export async function submitRecipe(
   try {
     const file = input.data.image;
 
-    const blob = await put(file.name, file, {
-      access: "public",
-    });
+    let blob: PutBlobResult | undefined;
+
+    if (file.size) {
+      blob = await put(file.name, file, {
+        access: "public",
+      });
+    }
 
     await db.insert(recipesTable).values({
       id,
@@ -125,7 +130,7 @@ export async function submitRecipe(
       prepTime: input.data.prepTime as number,
       ingredients: input.data.ingredients as string,
       procedure: input.data.procedure as string,
-      image_url: blob.url as string,
+      image_url: blob ? (blob.url as string) : null,
       likes: 0,
       submitted_by: userId,
       username: user.username,

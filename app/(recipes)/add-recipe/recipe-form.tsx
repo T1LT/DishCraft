@@ -92,14 +92,14 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
           className="block text-sm font-medium text-gray-700"
           htmlFor="image"
         >
-          Image
+          Image (optional)
         </label>
         <Input
           id="image"
           name="image"
           disabled={pending}
           type="file"
-          required
+          accept="image/jpg, image/jpeg, image/png, image/webp"
         />
       </div>
       {!pending &&
@@ -199,9 +199,9 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
 
 function ErrorMessage({ errors }: { errors: string[] }) {
   return (
-    <div className="flex flex-col sm:flex-row sm:space-y-0 sm:space-x-4 items-start">
+    <div className="flex flex-col items-start">
       <div className="w-16" />
-      <div className="mt-1 text-md text-red-500">
+      <div className="mt-1 text-sm text-red-500">
         {errors.map((error) => (
           <div key={error}>{error}</div>
         ))}
