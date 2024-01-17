@@ -15,7 +15,7 @@ export default function RecipeCard({ recipe }: { recipe: ReducedRecipe }) {
       href={`/recipes/${recipe.id.replace(/^recipe_/, "")}`}
       className="flex flex-col items-center"
     >
-      <div className="w-full px-4 py-4 flex flex-col items-start gap-2 group rounded-md hover:shadow-md hover:bg-neutral-100 transition">
+      <div className="w-full px-4 py-4 flex flex-col items-start gap-2 group rounded-md hover:bg-neutral-100/75 transition">
         <div className="w-full flex items-center gap-2">
           <span className="font-semibold text-gray-800 group-hover:text-black transition duration-300">
             {recipe.title}
