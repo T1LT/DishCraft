@@ -14,7 +14,7 @@ import { AddLink, AuthNav, UsernameLabel } from "@/app/(auth)/auth-nav";
 
 export default function Navbar() {
   return (
-    <div className="w-full px-4 flex justify-center sticky top-5 ">
+    <div className="w-full px-4 flex justify-center sticky top-4">
       <div className="z-10 max-w-5xl w-full py-4 px-6 flex justify-between lg:grid grid-cols-6 place-items-center text-sm rounded-full backdrop-filter bg-white/40 backdrop-blur border">
         <Link
           href="/"
