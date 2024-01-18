@@ -58,8 +58,8 @@ export const recipesTable = pgTable(
     cuisine: varchar("cuisine", { length: 256 }).notNull(),
     category: varchar("category", { length: 256 }).notNull(),
     prepTime: integer("prepTime").notNull(),
-    ingredients: text("ingredients"),
-    procedure: text("procedure"),
+    ingredients: text("ingredients").notNull(),
+    procedure: text("procedure").notNull(),
     username: varchar("username", { length: 256 }),
     likes: integer("likes").notNull().default(0),
     submitted_by: varchar("submitted_by", { length: 256 }).references(

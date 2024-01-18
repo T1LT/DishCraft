@@ -6,6 +6,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import LikeButton from "../like-button";
 import { auth } from "@/app/auth";
+import { MarkdownRenderer } from "@/components/markdown-renderer";
 
 async function getRecipe(id: string) {
   const recipeId = `recipe_${id}`;
@@ -92,11 +93,15 @@ export default async function RecipeItem({
       </div>
       <div>
         <h3 className="font-bold text-xl">Ingredients</h3>
-        <p className="leading-loose text-justify pt-2">{recipe.ingredients}</p>
+        <div className="mt-2">
+          <MarkdownRenderer>{recipe.ingredients}</MarkdownRenderer>
+        </div>
       </div>
       <div>
         <h3 className="font-bold text-xl">Procedure</h3>
-        <p className="leading-loose text-justify pt-2">{recipe.procedure}</p>
+        <div className="mt-2">
+          <MarkdownRenderer>{recipe.procedure}</MarkdownRenderer>
+        </div>
       </div>
     </div>
   );
