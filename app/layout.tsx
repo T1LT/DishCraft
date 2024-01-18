@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const jetbrains_mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dishcraft.vercel.app"),
   title: "DishCraft",
-  description:
-    "Your virtual kitchen companion, simplifying the joy of recipe storage and sharing, making culinary creativity a seamless experience.",
+  description: "Your one stop store for Recipes. Built for developers.",
 };
 
 export default function RootLayout({
@@ -18,7 +21,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} overflow-y-scroll`}>{children}</body>
+      <body
+        className={`${inter.className} ${jetbrains_mono.variable} overflow-y-scroll`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
