@@ -25,12 +25,32 @@ const ACCEPTED_IMAGE_TYPES = [
 ];
 
 const SubmitRecipeSchema = z.object({
-  title: z.string().min(3).max(80).trim(),
-  cuisine: z.string().min(3).max(80).trim(),
-  category: z.string().min(3).max(80).trim(),
-  prepTime: z.coerce.number(),
-  ingredients: z.string().max(5000).trim(),
-  procedure: z.string().max(5000).trim(),
+  title: z
+    .string()
+    .min(3, "Title is required. 3 characters minimum.")
+    .max(80, "Title has a maximum of 80 characters.")
+    .trim(),
+  cuisine: z
+    .string()
+    .min(3, "Cuisine is required. 3 characters minimum.")
+    .max(80, "Cuisine has a maximum of 80 characters.")
+    .trim(),
+  category: z
+    .string()
+    .min(3, "Category is required. 3 characters minimum.")
+    .max(80, "Category has a maximum of 80 characters.")
+    .trim(),
+  prepTime: z.coerce.number().min(0, "Prep Time cannot be negative."),
+  ingredients: z
+    .string()
+    .min(3, "Ingredients are required. 3 characters minimum.")
+    .max(5000, "Ingredients have a maximum of 5000 characters.")
+    .trim(),
+  procedure: z
+    .string()
+    .min(3, "Procedure is required. 3 characters minimum.")
+    .max(5000, "Procedure has a maximum of 5000 characters.")
+    .trim(),
   image: z
     .any()
     .refine((file) => file?.size <= MAX_FILE_SIZE, `Max file size is 4MB.`)
