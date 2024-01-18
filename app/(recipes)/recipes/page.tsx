@@ -51,7 +51,14 @@ export default async function Recipes({
   const recipes = await getRecipes(filter);
   console.timeEnd(`fetch ${filter} recipes (req: ${rid})`);
 
-  if (!recipes || !recipes.length) return <h1>No recipes found!</h1>;
+  if (!recipes || !recipes.length) {
+    return (
+      <div className="flex flex-col gap-2 items-center">
+        <h1 className="font-bold text-3xl">{capitalize(filter)} Recipes</h1>
+        <h1 className="font-semibold text-xl">No recipes found!</h1>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full max-w-lg space-y-4">

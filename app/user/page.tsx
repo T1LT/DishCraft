@@ -4,6 +4,7 @@ import { db, likesTable, recipesTable, usersTable } from "@/app/db";
 import { eq, sql } from "drizzle-orm";
 import { cookies, headers as dynamic } from "next/headers";
 import RecipeCard from "@/components/recipe-card";
+import Link from "next/link";
 
 async function getSubmittedRecipes(userId: string) {
   return await db
@@ -68,23 +69,45 @@ export default async function UserPage() {
       <h2 className="font-bold text-2xl">{user.username}</h2>
       <div>
         <h2 className="font-bold text-xl mb-2">Submitted Recipes</h2>
-        <ul className="space-y-2">
-          {submittedRecipes.map((recipe) => (
-            <li key={recipe.id}>
-              <RecipeCard recipe={recipe} />
-            </li>
-          ))}
-        </ul>
+        {submittedRecipes.length ? (
+          <ul className="space-y-2">
+            {submittedRecipes.map((recipe) => (
+              <li key={recipe.id}>
+                <RecipeCard recipe={recipe} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="flex flex-col gap-2">
+            <h1 className="font-semibold">No recipes submitted!</h1>
+            <Link href="/add-recipe" className="underline underline-offset-4">
+              Add a recipe
+            </Link>
+          </div>
+        )}
       </div>
       <div>
         <h2 className="font-bold text-xl mb-2">Liked Recipes</h2>
-        <ul className="space-y-2">
-          {likedRecipes.map((recipe) => (
-            <li key={recipe.id}>
-              <RecipeCard recipe={recipe} />
-            </li>
-          ))}
-        </ul>
+        {likedRecipes.length ? (
+          <ul className="space-y-2">
+            {likedRecipes.map((recipe) => (
+              <li key={recipe.id}>
+                <RecipeCard recipe={recipe} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="flex flex-col gap-2">
+            <h1 className="font-semibold">No recipes liked!</h1>
+            <Link
+              href="/recipes?filter=all"
+              prefetch={true}
+              className="underline underline-offset-4"
+            >
+              View all recipes
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
