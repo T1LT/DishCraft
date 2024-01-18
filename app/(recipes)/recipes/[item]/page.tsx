@@ -53,7 +53,7 @@ export default async function RecipeItem({
   userLiked = await getUserLiked(recipe.id, userId);
 
   return (
-    <div className="w-full max-w-xl space-y-8 px-8">
+    <div className="w-full max-w-xl space-y-8 px-4">
       <div>
         <h1 className="font-bold text-3xl text-center">{recipe.title}</h1>
         <h2 className="font-semibold text-lg text-center">{`by ${recipe.username}`}</h2>
