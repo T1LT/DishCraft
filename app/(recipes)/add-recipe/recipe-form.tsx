@@ -2,10 +2,16 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Loader2 } from "lucide-react";
+import { Loader2, Info } from "lucide-react";
 import { useFormState, useFormStatus } from "react-dom";
 import { Textarea } from "@/components/ui/textarea";
 import { submitRecipe, type SubmitRecipeData } from "../actions";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function RecipeForm() {
   const [state, formAction] = useFormState(submitRecipe, {});
@@ -131,10 +137,21 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
       ) : null}
       <div className="flex flex-col space-y-2 items-start">
         <label
-          className="block text-sm font-medium text-gray-700"
+          className="flex items-center gap-1 text-sm font-medium text-gray-700"
           htmlFor="ingredients"
         >
           Ingredients
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Info className="h-4 w-4 cursor-pointer" />
+              </TooltipTrigger>
+              <TooltipContent className="text-center">
+                <p>Markdown is supported!</p>
+                <p className="text-xs">(No images though)</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </label>
         <Textarea
           id="ingredients"
@@ -152,10 +169,21 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
       ) : null}
       <div className="flex flex-col space-y-2 items-start">
         <label
-          className="block text-sm font-medium text-gray-700"
+          className="flex items-center gap-1 text-sm font-medium text-gray-700"
           htmlFor="procedure"
         >
           Procedure
+          <TooltipProvider delayDuration={300}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Info className="h-4 w-4 cursor-pointer" />
+              </TooltipTrigger>
+              <TooltipContent className="text-center">
+                <p>Markdown is supported!</p>
+                <p className="text-xs">(No images though)</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </label>
         <Textarea
           id="procedure"
