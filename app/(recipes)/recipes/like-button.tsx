@@ -15,19 +15,14 @@ export default function LikeButton({
   recipeId,
   userLiked,
 }: LikeButtonProps) {
-  const [optimisticLikes, setOptimisticLike] = useOptimistic(
-    likes,
-    (state, _) => (userLiked ? state - 1 : state + 1),
-  );
   const [optimisticUserLiked, setOptimisticUserLiked] = useOptimistic(
     userLiked,
     (state, _) => !state,
   );
 
   const handleLike = async () => {
-    setOptimisticLike(1);
     setOptimisticUserLiked(!userLiked);
-    await changeLike(recipeId, optimisticLikes, optimisticUserLiked);
+    await changeLike(recipeId, likes, optimisticUserLiked);
   };
 
   return (
@@ -37,7 +32,6 @@ export default function LikeButton({
         onClick={handleLike}
         fill={optimisticUserLiked ? "red" : "none"}
       />
-      <span className="text-lg tabular-nums">{Number(optimisticLikes)}</span>
     </div>
   );
 }
