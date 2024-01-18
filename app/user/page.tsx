@@ -40,7 +40,7 @@ export default async function UserPage() {
   const cookieJar = cookies();
 
   if (!cookieJar.getAll().length) {
-    redirect("/login/next/add-recipe");
+    redirect("/login/next/user");
   }
 
   const session = await auth();
