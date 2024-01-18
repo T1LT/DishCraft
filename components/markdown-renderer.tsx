@@ -43,8 +43,9 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
           ),
         },
       }}
-      children={children}
       {...rest}
-    />
+    >
+      {children}
+    </Markdown>
   );
 };
