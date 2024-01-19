@@ -19,6 +19,7 @@ async function getRecipes(filter: string) {
         likes: recipesTable.likes,
       })
       .from(recipesTable);
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     return recipes;
   } else if (filter === "popular") {
     const popularRecipes = await db
@@ -34,6 +35,7 @@ async function getRecipes(filter: string) {
       })
       .from(recipesTable)
       .orderBy(desc(recipesTable.likes));
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     return popularRecipes;
   }
 }
