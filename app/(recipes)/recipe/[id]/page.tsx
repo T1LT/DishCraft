@@ -7,6 +7,19 @@ import { notFound } from "next/navigation";
 import LikeButton from "@/app/(recipes)/like-button";
 import { auth } from "@/app/auth";
 import { MarkdownRenderer } from "@/components/markdown-renderer";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Trash2 } from "lucide-react";
+import DeleteRecipe from "./delete-recipe";
 
 async function getRecipe(id: string) {
   const recipeId = `recipe_${id}`;
@@ -85,11 +98,38 @@ export default async function RecipeItem({
             {recipe.prepTime} min
           </p>
         </div>
-        <LikeButton
-          likes={recipe.likes}
-          recipeId={recipe.id}
-          userLiked={userLiked}
-        />
+        <div className="flex gap-2">
+          {userId === recipe.submitted_by ? (
+            <AlertDialog>
+              <AlertDialogTrigger>
+                <Trash2 className="h-6 w-6 text-red-500" />
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete
+                    the recipe from our server.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction asChild>
+                    <DeleteRecipe
+                      recipeId={recipe.id}
+                      submittedBy={recipe.submitted_by}
+                    />
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          ) : null}
+          <LikeButton
+            likes={recipe.likes}
+            recipeId={recipe.id}
+            userLiked={userLiked}
+          />
+        </div>
       </div>
       <div>
         <h3 className="font-bold text-xl">Ingredients</h3>
