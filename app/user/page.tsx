@@ -1,7 +1,7 @@
 import { auth } from "@/app/auth";
 import { redirect } from "next/navigation";
 import { db, likesTable, recipesTable, usersTable } from "@/app/db";
-import { eq, sql } from "drizzle-orm";
+import { desc, eq, sql } from "drizzle-orm";
 import { cookies, headers as dynamic } from "next/headers";
 import RecipeCard from "@/components/recipe-card";
 import Link from "next/link";
@@ -17,7 +17,8 @@ async function getSubmittedRecipes(userId: string) {
     })
     .from(recipesTable)
     .where(eq(recipesTable.submitted_by, userId))
-    .innerJoin(usersTable, eq(recipesTable.submitted_by, usersTable.id));
+    .innerJoin(usersTable, eq(recipesTable.submitted_by, usersTable.id))
+    .orderBy(desc(recipesTable.created_at));
 }
 
 async function getLikedRecipes(userId: string) {
