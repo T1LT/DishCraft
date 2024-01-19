@@ -13,7 +13,7 @@ import { auth } from "@/app/auth";
 import { redirect } from "next/navigation";
 import { likeRecipeRateLimit, newRecipeRateLimit } from "@/lib/rate-limit";
 import { PutBlobResult, put } from "@vercel/blob";
-import { eq, sql } from "drizzle-orm";
+import { desc, eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 const MAX_FILE_SIZE = 400000;
@@ -227,4 +227,37 @@ export async function changeLike(
   }
 
   revalidatePath(`/recipes/${recipeId.replace(/^recipe_/, "")}`);
+}
+
+export async function getRecipes(filter: string) {
+  if (!filter || filter === "all") {
+    const recipes = await db
+      .select({
+        id: recipesTable.id,
+        title: recipesTable.title,
+        cuisine: recipesTable.cuisine,
+        category: recipesTable.category,
+        username: recipesTable.username,
+        prepTime: recipesTable.prepTime,
+        image_url: recipesTable.image_url,
+        likes: recipesTable.likes,
+      })
+      .from(recipesTable);
+    return recipes;
+  } else if (filter === "popular") {
+    const popularRecipes = await db
+      .select({
+        id: recipesTable.id,
+        title: recipesTable.title,
+        cuisine: recipesTable.cuisine,
+        category: recipesTable.category,
+        username: recipesTable.username,
+        prepTime: recipesTable.prepTime,
+        image_url: recipesTable.image_url,
+        likes: recipesTable.likes,
+      })
+      .from(recipesTable)
+      .orderBy(desc(recipesTable.likes));
+    return popularRecipes;
+  }
 }

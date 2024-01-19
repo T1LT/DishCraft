@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function RecipeCardSkeleton() {
+export function RecipeCardSkeleton() {
   return (
     <div className="flex flex-col items-center">
       <div className="w-full px-4 py-4 flex flex-col items-start gap-2 group rounded-md">
@@ -16,5 +16,17 @@ export default function RecipeCardSkeleton() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function RecipeListSkeleton() {
+  return (
+    <ul className="space-y-2">
+      {Array.from({ length: 8 }, (_, idx) => (
+        <li key={idx}>
+          <RecipeCardSkeleton />
+        </li>
+      ))}
+    </ul>
   );
 }
