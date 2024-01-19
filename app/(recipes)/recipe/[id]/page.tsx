@@ -79,6 +79,7 @@ export default async function RecipeItem({
             height={300}
             width={400}
             alt={recipe.title}
+            priority={true}
             className="animate-reveal"
           />
         )}
