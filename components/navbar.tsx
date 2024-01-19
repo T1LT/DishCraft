@@ -94,28 +94,22 @@ export default function Navbar() {
               </Suspense>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem asChild>
               <Link href="/" prefetch={true} className="w-full">
                 All Recipes
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem asChild>
               <Link href="/popular" prefetch={true} className="w-full">
                 Popular Recipes
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Suspense
-                fallback={
-                  <Link href="/add" className="w-full">
-                    Add a Recipe
-                  </Link>
-                }
-              >
-                <AddLink />
-              </Suspense>
+            <DropdownMenuItem asChild>
+              <Link href="/add" className="w-full">
+                Add a Recipe
+              </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem asChild>
               <Link href="/user" prefetch={true} className="w-full">
                 My Page
               </Link>

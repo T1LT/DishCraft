@@ -32,7 +32,7 @@ export async function AuthNav({ type }: { type?: "dropdown" | undefined }) {
 function LoggedOut({ type }: { type?: "dropdown" | undefined }) {
   if (type === "dropdown") {
     return (
-      <Link href="/login" className="hover:underline font-semibold">
+      <Link href="/login" className="font-semibold">
         Login
       </Link>
     );
@@ -58,7 +58,7 @@ export async function AddLink() {
       href={session?.user?.id ? "/add" : "/login/next/add"}
       className="hover:underline underline-offset-4 flex gap-1"
     >
-      Add <span className="block lg:hidden">a Recipe</span>
+      Add
     </Link>
   );
 }
