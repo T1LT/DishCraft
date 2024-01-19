@@ -1,4 +1,4 @@
-import { Donut, Menu } from "lucide-react";
+import { Donut, Flame, Menu, Pizza, Plus, UserCircle2 } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
@@ -31,8 +31,9 @@ export default function Navbar() {
               <Link
                 href="/"
                 prefetch={true}
-                className="hover:underline underline-offset-4"
+                className="flex items-center gap-2 hover:underline underline-offset-4"
               >
+                <Pizza className="h-5 w-5" />
                 All
               </Link>
             </li>
@@ -41,8 +42,9 @@ export default function Navbar() {
               <Link
                 href="/popular"
                 prefetch={true}
-                className="hover:underline underline-offset-4"
+                className="flex items-center gap-2 hover:underline underline-offset-4"
               >
+                <Flame className="h-5 w-5" />
                 Popular
               </Link>
             </li>
@@ -54,6 +56,7 @@ export default function Navbar() {
                     href="/add"
                     className="hover:underline underline-offset-4"
                   >
+                    <Plus className="h-5 w-5" />
                     Add
                   </Link>
                 }
@@ -66,8 +69,9 @@ export default function Navbar() {
               <Link
                 href="/user"
                 prefetch={true}
-                className="hover:underline underline-offset-4"
+                className="flex items-center gap-2 hover:underline underline-offset-4"
               >
+                <UserCircle2 className="h-5 w-5" />
                 Me
               </Link>
             </li>

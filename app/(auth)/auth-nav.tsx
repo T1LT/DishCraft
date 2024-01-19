@@ -5,6 +5,7 @@ import { db, usersTable } from "@/app/db";
 import { sql } from "drizzle-orm";
 import { Logout } from "./logout";
 import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
 
 export async function AuthNav({ type }: { type?: "dropdown" | undefined }) {
   if (!cookies().getAll().length) return <LoggedOut type={type} />;
@@ -56,8 +57,9 @@ export async function AddLink() {
   return (
     <Link
       href={session?.user?.id ? "/add" : "/login/next/add"}
-      className="hover:underline underline-offset-4 flex gap-1"
+      className="flex items-center gap-2 hover:underline underline-offset-4"
     >
+      <Plus className="h-5 w-5" />
       Add
     </Link>
   );
