@@ -19,7 +19,6 @@ export default function LikeButton({
     userLiked,
     (state, _) => !state,
   );
-
   const handleLike = async () => {
     setOptimisticUserLiked(!userLiked);
     await changeLike(recipeId, likes, optimisticUserLiked);

@@ -93,15 +93,11 @@ export default async function RecipeItem({
       </div>
       <div>
         <h3 className="font-bold text-xl">Ingredients</h3>
-        <div className="mt-2">
-          <MarkdownRenderer>{recipe.ingredients}</MarkdownRenderer>
-        </div>
+        <MarkdownRenderer>{recipe.ingredients}</MarkdownRenderer>
       </div>
       <div>
         <h3 className="font-bold text-xl">Procedure</h3>
-        <div className="mt-2">
-          <MarkdownRenderer>{recipe.procedure}</MarkdownRenderer>
-        </div>
+        <MarkdownRenderer>{recipe.procedure}</MarkdownRenderer>
       </div>
     </div>
   );

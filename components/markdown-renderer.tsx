@@ -23,23 +23,23 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
           p: ({ children }) => <p className="my-2">{children}</p>,
           img: () => null,
           ul: ({ children }) => (
-            <ul className="list-disc flex flex-col gap-2 list-inside">
+            <ul className="list-disc flex flex-col gap-2 list-inside my-2">
               {children}
             </ul>
           ),
           ol: ({ children }) => (
-            <ol className="list-decimal flex flex-col gap-2 list-inside">
+            <ol className="list-decimal flex flex-col gap-2 list-inside my-2">
               {children}
             </ol>
           ),
           h1: ({ children }) => (
-            <h1 className="font-bold text-lg">{children}</h1>
+            <h1 className="font-bold text-lg my-1">{children}</h1>
           ),
           h2: ({ children }) => (
-            <h2 className="font-bold text-base">{children}</h2>
+            <h2 className="font-bold text-base my-1">{children}</h2>
           ),
           h3: ({ children }) => (
-            <h3 className="font-bold text-sm">{children}</h3>
+            <h3 className="font-bold text-sm my-1">{children}</h3>
           ),
         },
       }}
