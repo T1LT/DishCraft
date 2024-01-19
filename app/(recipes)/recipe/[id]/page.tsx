@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 import { headers } from "next/headers";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import LikeButton from "../like-button";
+import LikeButton from "@/app/(recipes)/like-button";
 import { auth } from "@/app/auth";
 import { MarkdownRenderer } from "@/components/markdown-renderer";
 
@@ -34,13 +34,13 @@ async function getUserLiked(recipeId: string, userId: string | undefined) {
 export default async function RecipeItem({
   params,
 }: {
-  params: { item: string };
+  params: { id: string };
 }) {
   const rid = headers().get("x-vercel-id") ?? nanoid();
 
-  console.time(`fetch recipe ${params.item} (req: ${rid})`);
-  const recipe = await getRecipe(params.item);
-  console.timeEnd(`fetch recipe ${params.item} (req: ${rid})`);
+  console.time(`fetch recipe ${params.id} (req: ${rid})`);
+  const recipe = await getRecipe(params.id);
+  console.timeEnd(`fetch recipe ${params.id} (req: ${rid})`);
 
   if (!recipe) notFound();
 

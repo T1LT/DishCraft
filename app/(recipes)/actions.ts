@@ -165,7 +165,7 @@ export async function submitRecipe(
     };
   }
 
-  redirect(`/recipes/${id.replace(/^recipe_/, "")}`);
+  redirect(`/${id.replace("_", "/")}`);
 }
 
 export async function changeLike(
@@ -226,11 +226,11 @@ export async function changeLike(
     };
   }
 
-  revalidatePath(`/recipes/${recipeId.replace(/^recipe_/, "")}`);
+  revalidatePath(`/${recipeId.replace("_", "/")}`);
 }
 
-export async function getRecipes(filter: string) {
-  if (!filter || filter === "all") {
+export async function getRecipes(filter: "all" | "popular") {
+  if (filter === "all") {
     const recipes = await db
       .select({
         id: recipesTable.id,

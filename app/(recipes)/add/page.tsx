@@ -8,13 +8,13 @@ export default async function AddRecipe() {
   const cookieJar = cookies();
 
   if (!cookieJar.getAll().length) {
-    redirect("/login/next/add-recipe");
+    redirect("/login/next/add");
   }
 
   const session = await auth();
 
   if (!session?.user?.id) {
-    return redirect("/login/next/add-recipe");
+    return redirect("/login/next/add");
   }
 
   const user = (

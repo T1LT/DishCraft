@@ -80,7 +80,7 @@ export default async function UserPage() {
         ) : (
           <div className="flex flex-col gap-2">
             <h1 className="font-semibold">No recipes submitted!</h1>
-            <Link href="/add-recipe" className="underline underline-offset-4">
+            <Link href="/add" className="underline underline-offset-4">
               Add a recipe
             </Link>
           </div>
@@ -100,7 +100,7 @@ export default async function UserPage() {
           <div className="flex flex-col gap-2">
             <h1 className="font-semibold">No recipes liked!</h1>
             <Link
-              href="/recipes?filter=all"
+              href="/"
               prefetch={true}
               className="underline underline-offset-4"
             >

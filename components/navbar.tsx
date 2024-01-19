@@ -29,7 +29,7 @@ export default function Navbar() {
           <ul className="flex space-x-4 sm:space-x-6 font-semibold text-base">
             <li>
               <Link
-                href="/recipes?filter=all"
+                href="/"
                 prefetch={true}
                 className="hover:underline underline-offset-4"
               >
@@ -39,7 +39,7 @@ export default function Navbar() {
             <li className="font-light select-none">|</li>
             <li>
               <Link
-                href="/recipes?filter=popular"
+                href="/popular"
                 prefetch={true}
                 className="hover:underline underline-offset-4"
               >
@@ -51,7 +51,7 @@ export default function Navbar() {
               <Suspense
                 fallback={
                   <Link
-                    href="/add-recipe"
+                    href="/add"
                     className="hover:underline underline-offset-4"
                   >
                     Add
@@ -95,27 +95,19 @@ export default function Navbar() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Link
-                href="/recipes?filter=all"
-                prefetch={true}
-                className="w-full"
-              >
+              <Link href="/" prefetch={true} className="w-full">
                 All Recipes
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link
-                href="/recipes?filter=popular"
-                prefetch={true}
-                className="w-full"
-              >
+              <Link href="/popular" prefetch={true} className="w-full">
                 Popular Recipes
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Suspense
                 fallback={
-                  <Link href="/add-recipe" className="w-full">
+                  <Link href="/add" className="w-full">
                     Add a Recipe
                   </Link>
                 }

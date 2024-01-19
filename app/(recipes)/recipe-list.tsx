@@ -1,9 +1,13 @@
 import RecipeCard from "@/components/recipe-card";
 import { nanoid } from "nanoid";
 import { headers } from "next/headers";
-import { getRecipes } from "../actions";
+import { getRecipes } from "./actions";
 
-export default async function RecipeList({ filter }: { filter: string }) {
+export default async function RecipeList({
+  filter,
+}: {
+  filter: "all" | "popular";
+}) {
   const rid = headers().get("x-vercel-id") ?? nanoid();
 
   console.time(`fetch ${filter} recipes (req: ${rid})`);
