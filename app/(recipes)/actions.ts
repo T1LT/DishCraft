@@ -96,6 +96,7 @@ export async function submitRecipe(
         username: usersTable.username,
       })
       .from(usersTable)
+      .where(eq(usersTable.id, userId))
   )[0];
 
   const input = SubmitRecipeSchema.safeParse({
