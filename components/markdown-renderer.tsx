@@ -27,12 +27,12 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
           p: ({ children }) => <p className="my-2">{children}</p>,
           img: () => null,
           ul: ({ children }) => (
-            <ul className="list-disc flex flex-col gap-2 list-inside my-2">
+            <ul className="list-disc flex flex-col gap-2 pl-4 my-2">
               {children}
             </ul>
           ),
           ol: ({ children }) => (
-            <ol className="list-decimal flex flex-col gap-2 list-inside my-2">
+            <ol className="list-decimal flex flex-col gap-2 pl-4 my-2">
               {children}
             </ol>
           ),
