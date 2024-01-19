@@ -14,13 +14,6 @@ const nextConfig = {
 
   swcMinify: true,
 
-  rewrites: () => [
-    {
-      source: "/recipes",
-      destination: "/recipes?filter=all",
-    },
-  ],
-
   images: {
     remotePatterns: [
       {

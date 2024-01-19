@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrains_mono = JetBrains_Mono({
@@ -24,7 +25,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} ${jetbrains_mono.variable} overflow-y-scroll`}
       >
-        {children}
+        <Suspense fallback={null}>{children}</Suspense>
       </body>
     </html>
   );

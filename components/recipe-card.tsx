@@ -12,7 +12,7 @@ type ReducedRecipe = {
 export default function RecipeCard({ recipe }: { recipe: ReducedRecipe }) {
   return (
     <Link
-      href={`/recipes/${recipe.id.replace(/^recipe_/, "")}`}
+      href={`/${recipe.id.replace("_", "/")}`}
       prefetch={true}
       className="flex flex-col items-center"
     >
