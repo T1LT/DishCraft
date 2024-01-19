@@ -12,6 +12,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useState } from "react";
+import { MarkdownRenderer } from "@/components/markdown-renderer";
+import { Switch } from "@/components/ui/switch";
 
 export default function RecipeForm() {
   const [state, formAction] = useFormState(submitRecipe, {});
@@ -26,6 +29,11 @@ export default function RecipeForm() {
 
 export function RecipeFormFields({ error }: SubmitRecipeData) {
   const { pending } = useFormStatus();
+  const [ingredientsInput, setIngredientsInput] = useState("");
+  const [procedureInput, setProcedureInput] = useState("");
+  const [ingredientsPreviewToggle, setIngredientsPreviewToggle] =
+    useState(false);
+  const [procedurePreviewToggle, setProcedurePreviewToggle] = useState(false);
 
   return (
     <div className="space-y-4 py-1">
@@ -136,30 +144,52 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
         <ErrorMessage errors={error.fieldErrors.prepTime} />
       ) : null}
       <div className="flex flex-col space-y-2 items-start">
-        <label
-          className="flex items-center gap-1 text-sm font-medium text-gray-700"
-          htmlFor="ingredients"
-        >
-          Ingredients
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Info className="h-4 w-4 cursor-pointer" />
-              </TooltipTrigger>
-              <TooltipContent className="text-center">
-                <p>Markdown is supported!</p>
-                <p className="text-xs">(No images though)</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </label>
-        <Textarea
-          id="ingredients"
-          name="ingredients"
-          disabled={pending}
-          placeholder="Enter Ingredients"
-          rows={4}
-        />
+        <div className="w-full flex justify-between">
+          <label
+            className="flex items-center gap-1 text-sm font-medium text-gray-700"
+            htmlFor="ingredients"
+          >
+            Ingredients
+            <TooltipProvider delayDuration={200}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Info className="h-4 w-4 cursor-pointer" />
+                </TooltipTrigger>
+                <TooltipContent className="text-center">
+                  <p>Markdown is supported!</p>
+                  <p className="text-xs">(No images though)</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </label>
+          <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
+            <label htmlFor="ingredients-preview">Preview</label>
+            <Switch
+              id="ingredients-preview"
+              disabled={!ingredientsInput.length}
+              aria-disabled={!ingredientsInput.length}
+              checked={ingredientsPreviewToggle}
+              onCheckedChange={() =>
+                setIngredientsPreviewToggle((prev) => !prev)
+              }
+            />
+          </div>
+        </div>
+        {ingredientsPreviewToggle ? (
+          <div className="w-full px-3 py-2 border rounded-md !text-sm">
+            <MarkdownRenderer>{ingredientsInput}</MarkdownRenderer>
+          </div>
+        ) : (
+          <Textarea
+            id="ingredients"
+            name="ingredients"
+            disabled={pending}
+            placeholder="Enter Ingredients"
+            rows={4}
+            value={ingredientsInput}
+            onChange={(e) => setIngredientsInput(e.target.value)}
+          />
+        )}
       </div>
       {!pending &&
       error &&
@@ -168,39 +198,59 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
         <ErrorMessage errors={error.fieldErrors.ingredients} />
       ) : null}
       <div className="flex flex-col space-y-2 items-start">
-        <label
-          className="flex items-center gap-1 text-sm font-medium text-gray-700"
-          htmlFor="procedure"
-        >
-          Procedure
-          <TooltipProvider delayDuration={300}>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Info className="h-4 w-4 cursor-pointer" />
-              </TooltipTrigger>
-              <TooltipContent className="text-center">
-                <p>Markdown is supported!</p>
-                <p className="text-xs">(No images though)</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </label>
-        <Textarea
-          id="procedure"
-          name="procedure"
-          disabled={pending}
-          placeholder="Enter Procedure"
-          onKeyDown={(e) => {
-            if (
-              (e.ctrlKey || e.metaKey) &&
-              (e.key === "Enter" || e.key === "NumpadEnter")
-            ) {
-              e.preventDefault();
-              e.currentTarget.form?.requestSubmit();
-            }
-          }}
-          rows={4}
-        />
+        <div className="w-full flex justify-between">
+          <label
+            className="flex items-center gap-1 text-sm font-medium text-gray-700"
+            htmlFor="procedure"
+          >
+            Procedure
+            <TooltipProvider delayDuration={200}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Info className="h-4 w-4 cursor-pointer" />
+                </TooltipTrigger>
+                <TooltipContent className="text-center">
+                  <p>Markdown is supported!</p>
+                  <p className="text-xs">(No images though)</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </label>
+          <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
+            <label htmlFor="procedure-preview">Preview</label>
+            <Switch
+              id="procedure-preview"
+              disabled={!procedureInput.length}
+              aria-disabled={!procedureInput.length}
+              checked={procedurePreviewToggle}
+              onCheckedChange={() => setProcedurePreviewToggle((prev) => !prev)}
+            />
+          </div>
+        </div>
+        {procedurePreviewToggle ? (
+          <div className="w-full px-3 py-2 border rounded-md !text-sm">
+            <MarkdownRenderer>{procedureInput}</MarkdownRenderer>
+          </div>
+        ) : (
+          <Textarea
+            id="procedure"
+            name="procedure"
+            disabled={pending}
+            placeholder="Enter Procedure"
+            onKeyDown={(e) => {
+              if (
+                (e.ctrlKey || e.metaKey) &&
+                (e.key === "Enter" || e.key === "NumpadEnter")
+              ) {
+                e.preventDefault();
+                e.currentTarget.form?.requestSubmit();
+              }
+            }}
+            rows={4}
+            value={procedureInput}
+            onChange={(e) => setProcedureInput(e.target.value)}
+          />
+        )}
       </div>
       {!pending &&
       error &&

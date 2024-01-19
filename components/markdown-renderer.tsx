@@ -18,7 +18,11 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
         ...options,
         overrides: {
           a: ({ className, ...rest }) => (
-            <Link className="underline underline-offset-4" {...rest} />
+            <Link
+              className="underline underline-offset-4"
+              target="_blank"
+              {...rest}
+            />
           ),
           p: ({ children }) => <p className="my-2">{children}</p>,
           img: () => null,
