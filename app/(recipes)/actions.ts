@@ -247,7 +247,8 @@ export async function getRecipes(filter: "all" | "popular") {
         image_url: recipesTable.image_url,
         likes: recipesTable.likes,
       })
-      .from(recipesTable);
+      .from(recipesTable)
+      .orderBy(desc(recipesTable.created_at));
     return recipes;
   } else if (filter === "popular") {
     const popularRecipes = await db
