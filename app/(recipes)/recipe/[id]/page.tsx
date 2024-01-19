@@ -66,7 +66,6 @@ export default async function RecipeItem({
             height={300}
             width={400}
             alt={recipe.title}
-            loading="eager"
             className="animate-reveal"
           />
         )}
