@@ -307,5 +307,6 @@ export async function deleteRecipe(recipeId: string, submittedBy: string) {
     };
   }
 
+  revalidatePath("/");
   redirect("/");
 }
