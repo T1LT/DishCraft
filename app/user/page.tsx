@@ -33,7 +33,8 @@ async function getLikedRecipes(userId: string) {
     .from(recipesTable)
     .where(eq(usersTable.id, userId))
     .innerJoin(likesTable, eq(recipesTable.id, likesTable.recipe_id))
-    .innerJoin(usersTable, eq(usersTable.id, likesTable.user_id));
+    .innerJoin(usersTable, eq(usersTable.id, likesTable.user_id))
+    .orderBy(desc(likesTable.updated_at));
 }
 
 export default async function UserPage() {

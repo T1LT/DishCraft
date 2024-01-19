@@ -94,6 +94,8 @@ export const likesTable = pgTable(
     user_id: varchar("user_id", { length: 256 })
       .notNull()
       .references(() => usersTable.id),
+    created_at: timestamp("created_at").notNull().defaultNow(),
+    updated_at: timestamp("updated_at").notNull().defaultNow(),
   },
   (t) => ({
     unq: unique().on(t.recipe_id, t.user_id),
