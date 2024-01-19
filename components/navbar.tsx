@@ -84,7 +84,10 @@ export default function Navbar() {
         </Suspense>
 
         <DropdownMenu>
-          <DropdownMenuTrigger className="flex lg:hidden">
+          <DropdownMenuTrigger
+            className="flex lg:hidden"
+            aria-label="Open navigation dropdown"
+          >
             <Menu className="h-5 w-5" />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
