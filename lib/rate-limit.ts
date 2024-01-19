@@ -39,3 +39,10 @@ export const likeRecipeRateLimit = new Ratelimit({
   analytics: true,
   prefix: "ratelimit:likerecipe",
 });
+
+export const deleteRecipeRateLimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(10, "15 s"),
+  analytics: true,
+  prefix: "ratelimit:deleterecipe",
+});

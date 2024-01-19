@@ -11,7 +11,11 @@ import {
 } from "@/app/db";
 import { auth } from "@/app/auth";
 import { redirect } from "next/navigation";
-import { likeRecipeRateLimit, newRecipeRateLimit } from "@/lib/rate-limit";
+import {
+  deleteRecipeRateLimit,
+  likeRecipeRateLimit,
+  newRecipeRateLimit,
+} from "@/lib/rate-limit";
 import { PutBlobResult, put } from "@vercel/blob";
 import { desc, eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
@@ -261,4 +265,46 @@ export async function getRecipes(filter: "all" | "popular") {
       .orderBy(desc(recipesTable.likes));
     return popularRecipes;
   }
+}
+
+export async function deleteRecipe(recipeId: string, submittedBy: string) {
+  const session = await auth();
+
+  if (!session?.user?.id) redirect("/login");
+
+  const userId = session.user.id;
+
+  if (userId !== submittedBy) {
+    return {
+      error: {
+        code: "AUTH_ERROR",
+        message: "You are not authorized to delete this recipe.",
+      },
+    };
+  }
+
+  const rl = await deleteRecipeRateLimit.limit(userId);
+
+  if (!rl.success) {
+    return {
+      error: {
+        code: "AUTH_ERROR",
+        message: "Too many attempts. Try again later.",
+      },
+    };
+  }
+
+  try {
+    await db.delete(recipesTable).where(eq(recipesTable.id, recipeId));
+  } catch (err) {
+    console.error(err);
+    return {
+      error: {
+        code: "INTERNAL_ERROR",
+        message: "Failed to delete recipe. Please try again later.",
+      },
+    };
+  }
+
+  redirect("/");
 }
