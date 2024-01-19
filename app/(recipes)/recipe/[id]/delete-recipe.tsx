@@ -17,7 +17,7 @@ export default function DeleteRecipe({
   const deleteRecipeWithArgs = deleteRecipe.bind(null, recipeId, submittedBy);
 
   return (
-    <form action={deleteRecipeWithArgs}>
+    <form action={deleteRecipeWithArgs} className="w-full sm:w-max">
       <DeleteRecipeButton />
     </form>
   );
@@ -29,7 +29,7 @@ export function DeleteRecipeButton() {
   return (
     <Button
       disabled={pending}
-      className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+      className="w-full bg-destructive text-destructive-foreground hover:bg-destructive/90"
     >
       {pending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
       Continue
