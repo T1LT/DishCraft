@@ -101,11 +101,13 @@ function SignUpFormFields({ error }: SignUpActionData) {
           <EyeOff
             onClick={() => setShowPassword((prev) => !prev)}
             className="text-gray-700 h-5 w-5 absolute right-2 top-[2.125rem] cursor-pointer"
+            aria-label="hide password"
           />
         ) : (
           <Eye
             onClick={() => setShowPassword((prev) => !prev)}
             className="text-gray-700 h-5 w-5 absolute right-2 top-[2.125rem] cursor-pointer"
+            aria-label="show password"
           />
         )}
         {error && "fieldErrors" in error && error.fieldErrors.password ? (
