@@ -3,9 +3,9 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { signInAction, type SignInActionData } from "../actions";
-import { Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useFormStatus, useFormState } from "react-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 export default function Login() {
@@ -52,6 +52,7 @@ function SignInForm({ next }: { next?: string }) {
 
 function SignInFormFields({ error }: SignInActionData) {
   const { pending } = useFormStatus();
+  const [showPassword, setShowPassword] = useState(false);
   // focus on the input only if there is an error,
   // and there wasn't an error before
   const inputRef = useRef<HTMLInputElement>(null);
@@ -82,19 +83,30 @@ function SignInFormFields({ error }: SignInActionData) {
           required
         />
       </div>
-      <div className="space-y-2">
+      <div className="space-y-2 relative">
         <label className="block text-gray-700 mb-1" htmlFor="password">
           Password
         </label>
         <Input
-          className="w-full text-base"
+          className="w-full text-base pr-8"
           id="password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           name="password"
           disabled={pending}
           autoComplete="current-password"
           required
         />
+        {showPassword ? (
+          <EyeOff
+            onClick={() => setShowPassword((prev) => !prev)}
+            className="text-gray-700 h-5 w-5 absolute right-2 top-[2.125rem] cursor-pointer"
+          />
+        ) : (
+          <Eye
+            onClick={() => setShowPassword((prev) => !prev)}
+            className="text-gray-700 h-5 w-5 absolute right-2 top-[2.125rem] cursor-pointer"
+          />
+        )}
       </div>
       <div className="flex flex-col gap-3 items-start">
         <Button className="p-0 h-8 px-4" disabled={pending}>
