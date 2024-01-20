@@ -7,6 +7,7 @@ import { desc, sql } from "drizzle-orm";
 import { Button } from "@/components/ui/button";
 import { NextLink } from "@/components/pagination-link";
 import { Suspense } from "react";
+import clsx from "clsx";
 
 const PER_PAGE = 20;
 const recipesTableName = getTableConfig(recipesTable).name;
@@ -93,16 +94,28 @@ export async function Next({ page }: { page: number }) {
   const hasMore = await hasMoreRecipes({ page });
 
   return (
-    <Button variant="link" disabled={!hasMore} className="hover:no-underline">
-      <NextLink page={page + 1} dir="Next" />
-    </Button>
+    <div className={clsx("w-max", !hasMore && "cursor-not-allowed")}>
+      <Button
+        variant="link"
+        disabled={!hasMore}
+        className="hover:no-underline p-0"
+      >
+        <NextLink page={page + 1} dir="Next" />
+      </Button>
+    </div>
   );
 }
 
 export async function Previous({ page }: { page: number }) {
   return (
-    <Button variant="link" disabled={page === 1} className="hover:no-underline">
-      <NextLink page={page - 1} dir="Previous" />
-    </Button>
+    <div className={clsx("w-max", page === 1 && "cursor-not-allowed")}>
+      <Button
+        variant="link"
+        disabled={page === 1}
+        className="hover:no-underline p-0"
+      >
+        <NextLink page={page - 1} dir="Previous" />
+      </Button>
+    </div>
   );
 }
