@@ -95,7 +95,7 @@ export default async function UserPage() {
                 ))}
               </ul>
             ) : (
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 p-2">
                 <h1 className="font-semibold">No recipes submitted!</h1>
                 <Link href="/add" className="underline underline-offset-4">
                   Add a recipe
@@ -115,7 +115,7 @@ export default async function UserPage() {
                 ))}
               </ul>
             ) : (
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 p-2">
                 <h1 className="font-semibold">No recipes liked!</h1>
                 <Link
                   href="/"
