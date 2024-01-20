@@ -21,7 +21,7 @@ import { PutBlobResult, put } from "@vercel/blob";
 import { desc, eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
-const MAX_FILE_SIZE = 400000;
+const MAX_FILE_SIZE = 4096000;
 const ACCEPTED_IMAGE_TYPES = [
   "image/jpeg",
   "image/jpg",
@@ -383,6 +383,8 @@ export async function editRecipe(
 
   try {
     const file = input.data.image;
+
+    console.log(file.size);
 
     let blob: PutBlobResult | undefined;
 
