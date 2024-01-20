@@ -22,6 +22,7 @@ import { Edit, Trash2 } from "lucide-react";
 import DeleteRecipe from "./delete-recipe";
 import { getRecipe } from "@/app/(recipes)/actions";
 import Link from "next/link";
+import BackButton from "@/components/back-button";
 
 async function getUserLiked(recipeId: string, userId: string | undefined) {
   if (!userId) return false;
@@ -60,7 +61,8 @@ export default async function RecipeItem({
 
   return (
     <div className="w-full max-w-xl space-y-8 px-4">
-      <div>
+      <div className="flex flex-col gap-2 items-center">
+        <BackButton />
         <h1 className="font-bold text-3xl text-center">{recipe.title}</h1>
         <h2 className="font-semibold text-lg text-center">{`by ${recipe.username}`}</h2>
       </div>

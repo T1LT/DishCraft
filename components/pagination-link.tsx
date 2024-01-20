@@ -24,12 +24,12 @@ export function NextLink({
       prefetch={true}
       className={cn(
         buttonVariants({ variant: "secondary" }),
-        "flex items-center gap-1",
+        "flex items-center",
       )}
     >
-      {dir === "Previous" ? <ChevronLeft className="h-4 w-4" /> : null}
+      {dir === "Previous" ? <ChevronLeft className="h-4 w-4 mr-2" /> : null}
       {dir}
-      {dir === "Next" ? <ChevronRight className="h-4 w-4" /> : null}
+      {dir === "Next" ? <ChevronRight className="h-4 w-4 ml-2" /> : null}
     </Link>
   );
 }
