@@ -25,11 +25,12 @@ export default function LikeButton({
   };
 
   return (
-    <div className="flex items-center space-x-2 h-max">
+    <div className="flex items-center justify-end space-x-2 h-max">
       <Heart
         className="h-6 w-6 cursor-pointer text-red-500"
         onClick={handleLike}
         fill={optimisticUserLiked ? "red" : "none"}
+        aria-label="like recipe"
       />
     </div>
   );
