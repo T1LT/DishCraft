@@ -5,6 +5,7 @@ import { desc, eq, sql } from "drizzle-orm";
 import { cookies, headers as dynamic } from "next/headers";
 import RecipeCard from "@/components/recipe-card";
 import Link from "next/link";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 async function getSubmittedRecipes(userId: string) {
   return await db
@@ -67,50 +68,64 @@ export default async function UserPage() {
 
   return (
     <div className="w-full max-w-lg space-y-4">
-      <h1 className="font-bold text-3xl text-center">User Page</h1>
-      <h2 className="font-bold text-2xl">{user.username}</h2>
-      <div>
-        <h2 className="font-bold text-xl mb-2">Submitted Recipes</h2>
-        {submittedRecipes.length ? (
-          <ul className="space-y-2">
-            {submittedRecipes.map((recipe) => (
-              <li key={recipe.id}>
-                <RecipeCard recipe={recipe} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <div className="flex flex-col gap-2">
-            <h1 className="font-semibold">No recipes submitted!</h1>
-            <Link href="/add" className="underline underline-offset-4">
-              Add a recipe
-            </Link>
-          </div>
-        )}
+      <div className="flex flex-col gap-2">
+        <h1 className="font-bold text-3xl text-center">User Page</h1>
+        <h2 className="font-bold text-2xl text-center">{user.username}</h2>
       </div>
-      <div>
-        <h2 className="font-bold text-xl mb-2">Liked Recipes</h2>
-        {likedRecipes.length ? (
-          <ul className="space-y-2">
-            {likedRecipes.map((recipe) => (
-              <li key={recipe.id}>
-                <RecipeCard recipe={recipe} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <div className="flex flex-col gap-2">
-            <h1 className="font-semibold">No recipes liked!</h1>
-            <Link
-              href="/"
-              prefetch={true}
-              className="underline underline-offset-4"
-            >
-              View all recipes
-            </Link>
+      <Tabs defaultValue="submitted" className="w-full">
+        <TabsList className="w-full">
+          <TabsTrigger value="submitted" className="w-full">
+            Submitted
+          </TabsTrigger>
+          <TabsTrigger value="liked" className="w-full">
+            Liked
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="submitted">
+          <div>
+            {submittedRecipes.length ? (
+              <ul className="space-y-2">
+                {submittedRecipes.map((recipe) => (
+                  <li key={recipe.id}>
+                    <RecipeCard recipe={recipe} />
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div className="flex flex-col gap-2">
+                <h1 className="font-semibold">No recipes submitted!</h1>
+                <Link href="/add" className="underline underline-offset-4">
+                  Add a recipe
+                </Link>
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </TabsContent>
+        <TabsContent value="liked">
+          <div>
+            {likedRecipes.length ? (
+              <ul className="space-y-2">
+                {likedRecipes.map((recipe) => (
+                  <li key={recipe.id}>
+                    <RecipeCard recipe={recipe} />
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div className="flex flex-col gap-2">
+                <h1 className="font-semibold">No recipes liked!</h1>
+                <Link
+                  href="/"
+                  prefetch={true}
+                  className="underline underline-offset-4"
+                >
+                  View all recipes
+                </Link>
+              </div>
+            )}
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
