@@ -18,18 +18,10 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Trash2 } from "lucide-react";
+import { Edit, Trash2 } from "lucide-react";
 import DeleteRecipe from "./delete-recipe";
-
-async function getRecipe(id: string) {
-  const recipeId = `recipe_${id}`;
-  return (
-    await db
-      .select()
-      .from(recipesTable)
-      .where(sql`id = ${recipeId}`)
-  )[0];
-}
+import { getRecipe } from "@/app/(recipes)/actions";
+import Link from "next/link";
 
 async function getUserLiked(recipeId: string, userId: string | undefined) {
   if (!userId) return false;
@@ -99,37 +91,45 @@ export default async function RecipeItem({
             {recipe.prepTime} min
           </p>
         </div>
-        <div className="flex gap-2">
-          {userId === recipe.submitted_by ? (
-            <AlertDialog>
-              <AlertDialogTrigger>
-                <Trash2 className="h-6 w-6 text-red-500" />
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete
-                    the recipe from our server.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction asChild>
-                    <DeleteRecipe
-                      recipeId={recipe.id}
-                      submittedBy={recipe.submitted_by}
-                    />
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          ) : null}
+        <div className="h-full flex flex-col justify-between gap-2">
           <LikeButton
             likes={recipe.likes}
             recipeId={recipe.id}
             userLiked={userLiked}
           />
+          {userId === recipe.submitted_by ? (
+            <>
+              <Link
+                href={`/${recipe.id.replace("_", "/")}/edit`}
+                prefetch={true}
+              >
+                <Edit className="h-6 w-6" />
+              </Link>
+              <AlertDialog>
+                <AlertDialogTrigger aria-label="delete recipe">
+                  <Trash2 className="h-6 w-6" />
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This action cannot be undone. This will permanently delete
+                      the recipe from our server.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction asChild>
+                      <DeleteRecipe
+                        recipeId={recipe.id}
+                        submittedBy={recipe.submitted_by}
+                      />
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            </>
+          ) : null}
         </div>
       </div>
       <div>

@@ -15,12 +15,13 @@ import {
   deleteRecipeRateLimit,
   likeRecipeRateLimit,
   newRecipeRateLimit,
+  updateRecipeRateLimit,
 } from "@/lib/rate-limit";
 import { PutBlobResult, put } from "@vercel/blob";
 import { desc, eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
-const MAX_FILE_SIZE = 400000;
+const MAX_FILE_SIZE = 4096000;
 const ACCEPTED_IMAGE_TYPES = [
   "image/jpeg",
   "image/jpg",
@@ -268,6 +269,16 @@ export async function getRecipes(filter: "all" | "popular") {
   }
 }
 
+export async function getRecipe(id: string) {
+  const recipeId = `recipe_${id}`;
+  return (
+    await db
+      .select()
+      .from(recipesTable)
+      .where(sql`id = ${recipeId}`)
+  )[0];
+}
+
 export async function deleteRecipe(recipeId: string, submittedBy: string) {
   const session = await auth();
 
@@ -307,5 +318,104 @@ export async function deleteRecipe(recipeId: string, submittedBy: string) {
     };
   }
 
+  revalidatePath("/");
   redirect("/");
+}
+
+export async function editRecipe(
+  recipeId: string,
+  submittedBy: string | null,
+  _prevState: any,
+  formData: FormData,
+): Promise<SubmitRecipeData | void> {
+  const session = await auth();
+
+  if (!session?.user?.id) redirect("/login");
+
+  const userId = session.user.id;
+
+  if (userId !== submittedBy) {
+    return {
+      error: {
+        code: "AUTH_ERROR",
+        message: "You are not authorized to delete this recipe.",
+      },
+    };
+  }
+
+  const input = SubmitRecipeSchema.safeParse({
+    title: formData.get("title"),
+    cuisine: formData.get("cuisine"),
+    category: formData.get("category"),
+    prepTime: formData.get("prepTime"),
+    ingredients: formData.get("ingredients"),
+    procedure: formData.get("procedure"),
+    image: formData.get("image"),
+  });
+
+  if (!input.success) {
+    const { fieldErrors } = input.error.flatten();
+    return {
+      error: {
+        code: "VALIDATION_ERROR",
+        fieldErrors,
+      },
+    };
+  }
+
+  const rl = await updateRecipeRateLimit.limit(userId);
+
+  if (!rl.success) {
+    return {
+      error: {
+        code: "AUTH_ERROR",
+        message: "Too many attempts. Try again later.",
+      },
+    };
+  }
+
+  const prevImageURL = (
+    await db
+      .select({ image_url: recipesTable.image_url })
+      .from(recipesTable)
+      .where(eq(recipesTable.id, recipeId))
+  )[0].image_url;
+
+  try {
+    const file = input.data.image;
+
+    console.log(file.size);
+
+    let blob: PutBlobResult | undefined;
+
+    if (file.size) {
+      blob = await put(file.name, file, {
+        access: "public",
+      });
+    }
+
+    await db
+      .update(recipesTable)
+      .set({
+        title: input.data.title as string,
+        cuisine: input.data.cuisine as string,
+        category: input.data.category as string,
+        prepTime: input.data.prepTime as number,
+        ingredients: input.data.ingredients as string,
+        procedure: input.data.procedure as string,
+        image_url: blob ? (blob.url as string) : (prevImageURL as string),
+      })
+      .where(eq(recipesTable.id, recipeId));
+  } catch (err) {
+    console.error(err);
+    return {
+      error: {
+        code: "INTERNAL_ERROR",
+        message: "Failed to update recipe. Please try again later.",
+      },
+    };
+  }
+
+  revalidatePath(`/${recipeId.replace("_", "/")}`);
+  redirect(`/${recipeId.replace("_", "/")}`);
 }
