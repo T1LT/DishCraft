@@ -384,8 +384,6 @@ export async function editRecipe(
   try {
     const file = input.data.image;
 
-    console.log(file.size);
-
     let blob: PutBlobResult | undefined;
 
     if (file.size) {
