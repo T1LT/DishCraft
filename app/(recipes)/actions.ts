@@ -269,6 +269,16 @@ export async function getRecipes(filter: "all" | "popular") {
   }
 }
 
+export async function getRecipe(id: string) {
+  const recipeId = `recipe_${id}`;
+  return (
+    await db
+      .select()
+      .from(recipesTable)
+      .where(sql`id = ${recipeId}`)
+  )[0];
+}
+
 export async function deleteRecipe(recipeId: string, submittedBy: string) {
   const session = await auth();
 
@@ -313,10 +323,10 @@ export async function deleteRecipe(recipeId: string, submittedBy: string) {
 }
 
 export async function editRecipe(
+  recipeId: string,
+  submittedBy: string | null,
   _prevState: any,
   formData: FormData,
-  recipeId: string,
-  submittedBy: string,
 ): Promise<SubmitRecipeData | void> {
   const session = await auth();
 

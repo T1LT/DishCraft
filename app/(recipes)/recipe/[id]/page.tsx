@@ -20,16 +20,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Trash2 } from "lucide-react";
 import DeleteRecipe from "./delete-recipe";
-
-async function getRecipe(id: string) {
-  const recipeId = `recipe_${id}`;
-  return (
-    await db
-      .select()
-      .from(recipesTable)
-      .where(sql`id = ${recipeId}`)
-  )[0];
-}
+import { getRecipe } from "@/app/(recipes)/actions";
 
 async function getUserLiked(recipeId: string, userId: string | undefined) {
   if (!userId) return false;
