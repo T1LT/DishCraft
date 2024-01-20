@@ -6,6 +6,7 @@ import { cookies, headers as dynamic } from "next/headers";
 import RecipeCard from "@/components/recipe-card";
 import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Heart, Send } from "lucide-react";
 
 async function getSubmittedRecipes(userId: string) {
   return await db
@@ -75,9 +76,11 @@ export default async function UserPage() {
       <Tabs defaultValue="submitted" className="w-full">
         <TabsList className="w-full">
           <TabsTrigger value="submitted" className="w-full">
+            <Send className="text-gray-700 h-4 w-4 mr-2" />
             Submitted
           </TabsTrigger>
           <TabsTrigger value="liked" className="w-full">
+            <Heart className="text-gray-700 h-4 w-4 mr-2" />
             Liked
           </TabsTrigger>
         </TabsList>
