@@ -25,15 +25,19 @@ export async function getRecipesCount() {
 
 export async function getRecipes({
   page,
+  filter,
   limit = PER_PAGE,
 }: {
   page: number;
+  filter: "all" | "popular";
   limit?: number;
 }) {
+  const order =
+    filter === "all" ? desc(recipesTable.created_at) : desc(recipesTable.likes);
   return await db
     .select()
     .from(recipesTable)
-    .orderBy(desc(recipesTable.created_at))
+    .orderBy(order)
     .limit(limit)
     .offset((page - 1) * limit);
 }
@@ -58,7 +62,7 @@ export default async function RecipeList({
   const rid = headers().get("x-vercel-id") ?? nanoid();
 
   console.time(`fetch ${filter} recipes (req: ${rid})`);
-  const recipes = await getRecipes({ page });
+  const recipes = await getRecipes({ page, filter });
   console.timeEnd(`fetch ${filter} recipes (req: ${rid})`);
 
   if (!recipes || !recipes.length) {
