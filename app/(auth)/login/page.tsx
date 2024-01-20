@@ -18,7 +18,7 @@ export default function Login() {
 
 export function LoginPage({ next }: { next?: string }) {
   return (
-    <main className="max-w-sm p-5">
+    <main className="max-w-sm p-8 border rounded-md shadow-sm">
       <h1 className="text-2xl font-bold mb-4 text-gray-800">Login</h1>
       <SignInForm next={next} />
       {/* TODO: IMPLEMENT FORGOT PASSWORD FLOW */}
