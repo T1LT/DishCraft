@@ -15,7 +15,7 @@ import { AddLink, AuthNav, UsernameLabel } from "@/app/(auth)/auth-nav";
 export default function Navbar() {
   return (
     <div className="w-full px-4 flex justify-center sticky top-4">
-      <div className="z-10 max-w-5xl w-full py-4 px-6 flex justify-between lg:grid grid-cols-6 place-items-center text-sm rounded-full backdrop-filter bg-white/40 backdrop-blur border">
+      <div className="z-10 h-[74px] max-w-5xl w-full py-4 px-6 flex justify-between lg:grid grid-cols-6 place-items-center text-sm rounded-full backdrop-filter bg-white/40 backdrop-blur border">
         <Link
           href="/"
           className="col-span-2 lg:col-span-1 w-full flex justify-start"
@@ -77,13 +77,7 @@ export default function Navbar() {
             </li>
           </ul>
         </nav>
-        <Suspense
-          fallback={
-            <Button className="h-8 py-5 px-4 rounded-full hidden lg:flex lg:col-span-1">
-              Log Out
-            </Button>
-          }
-        >
+        <Suspense fallback={null}>
           <AuthNav />
         </Suspense>
 
