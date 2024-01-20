@@ -374,6 +374,13 @@ export async function editRecipe(
     };
   }
 
+  const prevImageURL = (
+    await db
+      .select({ image_url: recipesTable.image_url })
+      .from(recipesTable)
+      .where(eq(recipesTable.id, recipeId))
+  )[0].image_url;
+
   try {
     const file = input.data.image;
 
@@ -394,7 +401,7 @@ export async function editRecipe(
         prepTime: input.data.prepTime as number,
         ingredients: input.data.ingredients as string,
         procedure: input.data.procedure as string,
-        image_url: blob ? (blob.url as string) : null,
+        image_url: blob ? (blob.url as string) : (prevImageURL as string),
       })
       .where(eq(recipesTable.id, recipeId));
   } catch (err) {

@@ -46,8 +46,8 @@ export function RecipeFormFields({
   const { error } = state;
   const { pending } = useFormStatus();
 
-  const [ingredientsInput, setIngredientsInput] = useState("");
-  const [procedureInput, setProcedureInput] = useState("");
+  const [ingredientsInput, setIngredientsInput] = useState(recipe.ingredients);
+  const [procedureInput, setProcedureInput] = useState(recipe.procedure);
   const [ingredientsPreviewToggle, setIngredientsPreviewToggle] =
     useState(false);
   const [procedurePreviewToggle, setProcedurePreviewToggle] = useState(false);
@@ -66,6 +66,7 @@ export function RecipeFormFields({
           name="title"
           autoFocus
           disabled={pending}
+          defaultValue={recipe.title}
           placeholder="Enter Title"
           type="text"
         />
@@ -87,6 +88,7 @@ export function RecipeFormFields({
           id="cuisine"
           name="cuisine"
           disabled={pending}
+          defaultValue={recipe.cuisine}
           placeholder="Enter Cuisine"
           type="text"
         />
@@ -108,6 +110,7 @@ export function RecipeFormFields({
           id="category"
           name="category"
           disabled={pending}
+          defaultValue={recipe.category}
           placeholder="Enter Category"
           type="text"
         />
@@ -150,6 +153,7 @@ export function RecipeFormFields({
           id="prepTime"
           name="prepTime"
           disabled={pending}
+          defaultValue={recipe.prepTime}
           placeholder="Enter Prep Time"
           type="number"
         />

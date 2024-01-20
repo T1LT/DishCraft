@@ -31,6 +31,10 @@ export default async function EditRecipe({
     return redirect("/login");
   }
 
+  if (session.user.id !== recipe.submitted_by) {
+    return redirect(`/recipe/${params.id}`);
+  }
+
   const user = (
     await db
       .select({
