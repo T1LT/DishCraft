@@ -3,9 +3,9 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { signUpAction, type SignUpActionData } from "../actions";
-import { Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useFormStatus, useFormState } from "react-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 export default function SignUp() {
@@ -46,6 +46,7 @@ function SignUpForm({ next }: { next?: string }) {
 
 function SignUpFormFields({ error }: SignUpActionData) {
   const { pending } = useFormStatus();
+  const [showPassword, setShowPassword] = useState(false);
   // focus on the input only if there is an error,
   // and there wasn't an error before
   const inputRef = useRef<HTMLInputElement>(null);
@@ -83,20 +84,30 @@ function SignUpFormFields({ error }: SignUpActionData) {
           </div>
         ) : null}
       </div>
-      <div className="space-y-2">
+      <div className="space-y-2 relative">
         <label className="block text-gray-700 mb-1" htmlFor="new-password">
           Password
         </label>
         <Input
-          className="w-full text-base"
+          className="w-full text-base pr-8"
           id="new-password"
           name="password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           disabled={pending}
           required
           autoComplete="new-password"
         />
-
+        {showPassword ? (
+          <EyeOff
+            onClick={() => setShowPassword((prev) => !prev)}
+            className="text-gray-700 h-5 w-5 absolute right-2 top-[2.125rem] cursor-pointer"
+          />
+        ) : (
+          <Eye
+            onClick={() => setShowPassword((prev) => !prev)}
+            className="text-gray-700 h-5 w-5 absolute right-2 top-[2.125rem] cursor-pointer"
+          />
+        )}
         {error && "fieldErrors" in error && error.fieldErrors.password ? (
           <div className="text-red-500 text-sm">
             {error.fieldErrors.password.map((err) => (
