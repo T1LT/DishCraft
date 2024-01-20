@@ -54,7 +54,7 @@ export default function Navbar() {
                 fallback={
                   <Link
                     href="/add"
-                    className="hover:underline underline-offset-4"
+                    className="flex items-center gap-2 hover:underline underline-offset-4"
                   >
                     <Plus className="h-5 w-5" />
                     Add
