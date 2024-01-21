@@ -7,6 +7,8 @@ import RecipeCard from "@/components/recipe-card";
 import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Heart, Upload } from "lucide-react";
+import { Suspense } from "react";
+import { RecipeListSkeleton } from "@/components/skeletons/recipes-skeleton";
 
 async function getSubmittedRecipes(userId: string) {
   return await db
@@ -64,9 +66,6 @@ export default async function UserPage() {
 
   if (!user) redirect("/login");
 
-  const submittedRecipes = await getSubmittedRecipes(user.id);
-  const likedRecipes = await getLikedRecipes(user.id);
-
   return (
     <div className="w-full max-w-lg space-y-4">
       <div className="flex flex-col gap-2">
@@ -85,50 +84,70 @@ export default async function UserPage() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="submitted">
-          <div>
-            {submittedRecipes.length ? (
-              <ul className="space-y-2">
-                {submittedRecipes.map((recipe) => (
-                  <li key={recipe.id}>
-                    <RecipeCard recipe={recipe} />
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <div className="flex flex-col gap-2 p-2">
-                <h1 className="font-semibold">No recipes submitted!</h1>
-                <Link href="/add" className="underline underline-offset-4">
-                  Add a recipe
-                </Link>
-              </div>
-            )}
-          </div>
+          <Suspense fallback={<RecipeListSkeleton />}>
+            <SubmittedRecipes userId={user.id} />
+          </Suspense>
         </TabsContent>
         <TabsContent value="liked">
-          <div>
-            {likedRecipes.length ? (
-              <ul className="space-y-2">
-                {likedRecipes.map((recipe) => (
-                  <li key={recipe.id}>
-                    <RecipeCard recipe={recipe} />
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <div className="flex flex-col gap-2 p-2">
-                <h1 className="font-semibold">No recipes liked!</h1>
-                <Link
-                  href="/"
-                  prefetch={true}
-                  className="underline underline-offset-4"
-                >
-                  View all recipes
-                </Link>
-              </div>
-            )}
-          </div>
+          <Suspense fallback={<RecipeListSkeleton />}>
+            <LikedRecipes userId={user.id} />
+          </Suspense>
         </TabsContent>
       </Tabs>
+    </div>
+  );
+}
+
+async function SubmittedRecipes({ userId }: { userId: string }) {
+  const submittedRecipes = await getSubmittedRecipes(userId);
+
+  return (
+    <div>
+      {submittedRecipes.length ? (
+        <ul className="space-y-2">
+          {submittedRecipes.map((recipe) => (
+            <li key={recipe.id}>
+              <RecipeCard recipe={recipe} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className="flex flex-col gap-2 p-2">
+          <h1 className="font-semibold">No recipes submitted!</h1>
+          <Link href="/add" className="underline underline-offset-4">
+            Add a recipe
+          </Link>
+        </div>
+      )}
+    </div>
+  );
+}
+
+async function LikedRecipes({ userId }: { userId: string }) {
+  const likedRecipes = await getLikedRecipes(userId);
+
+  return (
+    <div>
+      {likedRecipes.length ? (
+        <ul className="space-y-2">
+          {likedRecipes.map((recipe) => (
+            <li key={recipe.id}>
+              <RecipeCard recipe={recipe} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className="flex flex-col gap-2 p-2">
+          <h1 className="font-semibold">No recipes liked!</h1>
+          <Link
+            href="/"
+            prefetch={true}
+            className="underline underline-offset-4"
+          >
+            View all recipes
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

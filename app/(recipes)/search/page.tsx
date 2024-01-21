@@ -4,6 +4,7 @@ import RecipeList from "../recipe-list";
 import { headers as dynamic } from "next/headers";
 import z from "zod";
 import { notFound } from "next/navigation";
+import { RecipeListSkeleton } from "@/components/skeletons/recipes-skeleton";
 
 const SearchParamsSchema = z.object({
   q: z.string().max(256).optional().default(""),
@@ -26,7 +27,7 @@ export default function SearchPage({
         <h1 className="font-bold text-3xl text-center">Search Recipes</h1>
         <SearchInput />
       </div>
-      <Suspense fallback={null}>
+      <Suspense fallback={<RecipeListSkeleton />}>
         <RecipeList filter="all" q={query.data.q} />
       </Suspense>
     </div>

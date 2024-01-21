@@ -13,7 +13,7 @@ const jetbrains_mono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "DishCraft",
-  description: "One stop store for your recipes. Built for developers.",
+  description: "One-stop store for your recipes. Built for developers.",
   metadataBase: new URL("https://dishcraft.vercel.app"),
 };
 
