@@ -69,7 +69,7 @@ export default async function UserPage() {
   return (
     <div className="w-full max-w-lg space-y-4">
       <div className="flex flex-col gap-2">
-        <h1 className="font-bold text-3xl text-center">User Page</h1>
+        <h1 className="font-bold text-3xl text-center">My Page</h1>
         <h2 className="font-bold text-2xl text-center">{user.username}</h2>
       </div>
       <Tabs defaultValue="submitted" className="w-full">
