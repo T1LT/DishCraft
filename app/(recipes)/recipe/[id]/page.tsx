@@ -1,10 +1,10 @@
-import { db, likesTable, recipesTable } from "@/app/db";
+import { db, likesTable } from "@/app/db";
 import { sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { headers } from "next/headers";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import LikeButton from "@/app/(recipes)/like-button";
+import LikeButton from "@/app/(recipes)/recipe/[id]/like-button";
 import { auth } from "@/app/auth";
 import { MarkdownRenderer } from "@/components/markdown-renderer";
 import {
@@ -18,12 +18,12 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Edit, Trash2 } from "lucide-react";
 import DeleteRecipe from "./delete-recipe";
 import { getRecipe } from "@/app/(recipes)/actions";
 import Link from "next/link";
 import BackButton from "@/components/back-button";
 import { Button } from "@/components/ui/button";
+import ShareButton from "./share-button";
 
 async function getUserLiked(recipeId: string, userId: string | undefined) {
   if (!userId) return false;
@@ -94,7 +94,8 @@ export default async function RecipeItem({
             {recipe.prepTime} min
           </p>
         </div>
-        <div className="h-full flex flex-col items-center">
+        <div className="h-full flex items-center gap-2">
+          <ShareButton />
           <LikeButton
             likes={recipe.likes}
             recipeId={recipe.id}

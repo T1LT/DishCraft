@@ -1,7 +1,7 @@
 "use client";
 
 import { useOptimistic } from "react";
-import { changeLike } from "./actions";
+import { changeLike } from "../../actions";
 import { Heart } from "lucide-react";
 
 interface LikeButtonProps {
