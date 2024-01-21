@@ -14,7 +14,15 @@ A recipe-sharing platform built for developers.
 * [Vercel KV Database](https://vercel.com/docs/storage/vercel-kv) (for rate limiting)
 * [Vercel Blob Store](https://vercel.com/docs/storage/vercel-blob) (for image storage)
 
-[PageSpeed Insights](https://pagespeed.web.dev/analysis/https-dishcraft-vercel-app/5p9tqr4sca?form_factor=mobile)
+### [PageSpeed Insights](https://pagespeed.web.dev/analysis/https-dishcraft-vercel-app/5p9tqr4sca?form_factor=mobile)
+
+Mobile Speed Insights on Moto G Power with Slow 4G Throttling
+
+![image](https://github.com/T1LT/DishCraft/assets/65653163/538900b2-6f73-43b8-a1d7-8bd78d22e463)
+
+Desktop Speed Insights
+
+![image](https://github.com/T1LT/DishCraft/assets/65653163/75bd80a1-5e46-4119-93cd-d22c06d33366)
 
 Used Partial Pre-Rendering, App Router, Server Actions, and React Server Components in Next.js.
 
@@ -34,4 +42,5 @@ Used Partial Pre-Rendering, App Router, Server Actions, and React Server Compone
 
 ### Contributing
 Feel free to open issues/create pull requests if you want to see any changes or if you want to add any enhancements!
+
 There are a few issues open already if you want something to take up a task right away.
