@@ -15,6 +15,7 @@ import {
 import { useState } from "react";
 import { MarkdownRenderer } from "@/components/markdown-renderer";
 import { Switch } from "@/components/ui/switch";
+import clsx from "clsx";
 
 export default function RecipeForm() {
   const [state, formAction] = useFormState(submitRecipe, {});
@@ -175,21 +176,23 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
             />
           </div>
         </div>
-        {ingredientsPreviewToggle ? (
-          <div className="w-full px-3 py-2 border rounded-md !text-sm">
-            <MarkdownRenderer>{ingredientsInput}</MarkdownRenderer>
-          </div>
-        ) : (
-          <Textarea
-            id="ingredients"
-            name="ingredients"
-            disabled={pending}
-            placeholder="Enter Ingredients"
-            rows={4}
-            value={ingredientsInput}
-            onChange={(e) => setIngredientsInput(e.target.value)}
-          />
-        )}
+        <div
+          className={clsx(
+            "w-full px-3 py-2 border rounded-md !text-sm",
+            ingredientsPreviewToggle ? "block" : "hidden",
+          )}
+        >
+          <MarkdownRenderer>{ingredientsInput}</MarkdownRenderer>
+        </div>
+        <Textarea
+          id="ingredients"
+          name="ingredients"
+          disabled={pending}
+          placeholder="Enter Ingredients"
+          rows={4}
+          value={ingredientsInput}
+          onChange={(e) => setIngredientsInput(e.target.value)}
+        />
       </div>
       {!pending &&
       error &&
@@ -227,30 +230,32 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
             />
           </div>
         </div>
-        {procedurePreviewToggle ? (
-          <div className="w-full px-3 py-2 border rounded-md !text-sm">
-            <MarkdownRenderer>{procedureInput}</MarkdownRenderer>
-          </div>
-        ) : (
-          <Textarea
-            id="procedure"
-            name="procedure"
-            disabled={pending}
-            placeholder="Enter Procedure"
-            onKeyDown={(e) => {
-              if (
-                (e.ctrlKey || e.metaKey) &&
-                (e.key === "Enter" || e.key === "NumpadEnter")
-              ) {
-                e.preventDefault();
-                e.currentTarget.form?.requestSubmit();
-              }
-            }}
-            rows={4}
-            value={procedureInput}
-            onChange={(e) => setProcedureInput(e.target.value)}
-          />
-        )}
+        <div
+          className={clsx(
+            "w-full px-3 py-2 border rounded-md !text-sm",
+            procedurePreviewToggle ? "block" : "hidden",
+          )}
+        >
+          <MarkdownRenderer>{procedureInput}</MarkdownRenderer>
+        </div>
+        <Textarea
+          id="procedure"
+          name="procedure"
+          disabled={pending}
+          placeholder="Enter Procedure"
+          onKeyDown={(e) => {
+            if (
+              (e.ctrlKey || e.metaKey) &&
+              (e.key === "Enter" || e.key === "NumpadEnter")
+            ) {
+              e.preventDefault();
+              e.currentTarget.form?.requestSubmit();
+            }
+          }}
+          rows={4}
+          value={procedureInput}
+          onChange={(e) => setProcedureInput(e.target.value)}
+        />
       </div>
       {!pending &&
       error &&
