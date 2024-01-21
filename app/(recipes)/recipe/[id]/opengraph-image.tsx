@@ -44,7 +44,7 @@ export default async function MainOG({
 
   return new ImageResponse(
     (
-      <div tw="flex h-full w-full px-4" style={font("Inter 300")}>
+      <div tw="flex h-full w-full px-4 bg-white" style={font("Inter 300")}>
         <div tw="flex flex-col justify-between h-full w-full">
           <div tw="p-4 pt-8 pb-0 flex flex-row items-center w-full text-3xl">
             <div tw="flex items-center">
