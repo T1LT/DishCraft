@@ -1,4 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import Navbar from "../navbar";
 
 export function RecipeCardSkeleton() {
   return (
@@ -28,5 +29,19 @@ export default function RecipeListSkeleton() {
         </li>
       ))}
     </ul>
+  );
+}
+
+export function LayoutSkeleton() {
+  return (
+    <>
+      <Navbar />
+      <div className="w-full max-w-lg space-y-4">
+        <div className="flex justify-center">
+          <Skeleton className="h-[40px] w-[250px]" />
+        </div>
+        <RecipeListSkeleton />
+      </div>
+    </>
   );
 }

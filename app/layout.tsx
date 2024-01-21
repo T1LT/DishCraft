@@ -4,6 +4,7 @@ import "./globals.css";
 import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "@/components/ui/toaster";
+import { LayoutSkeleton } from "@/components/skeletons/recipes-skeleton";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrains_mono = JetBrains_Mono({
@@ -27,7 +28,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} ${jetbrains_mono.variable} overflow-y-scroll`}
       >
-        <Suspense fallback={null}>{children}</Suspense>
+        <Suspense fallback={<LayoutSkeleton />}>{children}</Suspense>
         <Toaster />
         <Analytics />
       </body>
