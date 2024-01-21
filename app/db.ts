@@ -73,10 +73,10 @@ export const recipesTable = pgTable(
     trgm_idx: index("trgm_idx")
       .on(t.title)
       .concurrently()
-      .using(sql`gin (title gin_trgm_ops)`),
+      .using(
+        sql`gin (title gin_trgm_ops, cuisine gin_trgm_ops, category gin_trgm_ops)`,
+      ),
     created_at_idx: index("created_at_idx").on(t.created_at),
-    cuisine_idx: index("cuisine_idx").on(t.cuisine),
-    category_idx: index("category_idx").on(t.category),
   }),
 );
 
