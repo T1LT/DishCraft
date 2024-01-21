@@ -1,28 +1,14 @@
 import RecipeCard from "@/components/recipe-card";
 import { nanoid } from "nanoid";
 import { headers } from "next/headers";
-import { getTableConfig } from "drizzle-orm/pg-core";
 import { db, recipesTable } from "@/app/db";
-import { desc, ilike, sql, or } from "drizzle-orm";
+import { desc, ilike, or } from "drizzle-orm";
 import { Button } from "@/components/ui/button";
 import { NextLink } from "@/components/pagination-link";
 import { Suspense } from "react";
 import clsx from "clsx";
 
 const PER_PAGE = 20;
-const recipesTableName = getTableConfig(recipesTable).name;
-
-export async function getRecipesCount() {
-  // high perf estimate
-  const statement = sql`SELECT reltuples::BIGINT AS estimate
-    FROM pg_class
-    WHERE relname = ${recipesTableName}
-  `;
-  const res = await db.execute(statement);
-  if (!res.rows[0]) return 0;
-  const row: { estimate: number } = res.rows[0] as any;
-  return row.estimate ?? 0;
-}
 
 function recipesWhere(q: string | null) {
   return q != null && q.length
