@@ -80,7 +80,9 @@ export default async function RecipeList({
   console.timeEnd(`fetch ${filter} recipes (req: ${rid})`);
 
   if (!recipes || !recipes.length) {
-    return <h1 className="font-semibold text-xl">No recipes found!</h1>;
+    return (
+      <h1 className="font-medium text-lg text-center">No recipes found!</h1>
+    );
   }
 
   return (
