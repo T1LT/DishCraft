@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import { headers } from "next/headers";
 import { getTableConfig } from "drizzle-orm/pg-core";
 import { db, recipesTable } from "@/app/db";
-import { desc, ilike, sql } from "drizzle-orm";
+import { desc, ilike, sql, or } from "drizzle-orm";
 import { Button } from "@/components/ui/button";
 import { NextLink } from "@/components/pagination-link";
 import { Suspense } from "react";
@@ -26,7 +26,11 @@ export async function getRecipesCount() {
 
 function recipesWhere(q: string | null) {
   return q != null && q.length
-    ? ilike(recipesTable.title, `%${q}%`)
+    ? or(
+        ilike(recipesTable.title, `%${q}%`),
+        ilike(recipesTable.cuisine, `%${q}%`),
+        ilike(recipesTable.category, `%${q}%`),
+      )
     : undefined;
 }
 
