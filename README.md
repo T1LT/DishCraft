@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# [DishCraft](https://dishcraft.vercel.app)
+A recipe-sharing platform built for developers.
 
-## Getting Started
+### Technologies Used
+* [Next.js](https://nextjs.org/)
+* [TypeScript](https://www.typescriptlang.org/)
+* [Tailwind CSS](https://tailwindcss.com/)
+* [Shadcn UI](https://ui.shadcn.com/)
+* [Radix UI](https://www.radix-ui.com/)
+* [Auth.js](https://authjs.dev/guides/upgrade-to-v5)
+* [Zod](https://zod.dev/) (for validation)
+* [Drizzle ORM](https://orm.drizzle.team/)
+* [Neon Postgres](https://neon.tech/)
+* [Vercel KV Database](https://vercel.com/docs/storage/vercel-kv) (for rate limiting)
+* [Vercel Blob Store](https://vercel.com/docs/storage/vercel-blob) (for image storage)
 
-First, run the development server:
+[PageSpeed Insights](https://pagespeed.web.dev/analysis/https-dishcraft-vercel-app/5p9tqr4sca?form_factor=mobile)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Used Partial Pre-Rendering, App Router, Server Actions, and React Server Components in Next.js.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Development
+* Clone the repo using `git clone https://github.com/T1LT/DishCraft.git`
+* Install the packages using `npm i`
+* Add environment variables as specified in the `.env.example` file.
+* Make sure `?sslmode=required` is at the end of the `POSTGRES_URL` env variable.
+* For database migrations, use `npx drizzle-kit generate:pg` and `npx drizzle-kit push:pg`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Deployment
+* Make sure the Vercel project is connected to a Vercel Postgres (Neon) database.
+* Connect the project to a Vercel Blob store.
+* For rate limiting, add a Vercel KV (Upstash) database.
+* Run `npx drizzle-kit push:pg` to push changes to your database.
+* Update `metadataBase` in `app/layout.tsx` to match your target domain.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Contributing
+Feel free to open issues/create pull requests if you want to see any changes or if you want to add any enhancements!
+There are a few issues open already if you want something to take up a task right away.
