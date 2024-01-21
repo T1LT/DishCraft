@@ -18,7 +18,7 @@ export default function SignUp() {
 
 export function SignUpPage({ next }: { next?: string }) {
   return (
-    <main className="max-w-sm p-8 border rounded-md shadow-md">
+    <main className="max-w-sm p-8 border rounded-md shadow-sm">
       <h2 className="text-2xl font-bold mb-4 text-gray-800">Create Account</h2>
       <SignUpForm next={next} />
       <div className="mt-3">
