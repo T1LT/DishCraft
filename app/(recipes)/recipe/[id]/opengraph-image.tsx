@@ -57,7 +57,7 @@ export default async function MainOG({
           </div>
           <div tw="p-4 flex flex-col justify-center items-center w-full">
             <h3
-              tw="flex tracking-tight leading-tight text-5xl text-center mb-2 text-[#FF9966] justify-center"
+              tw="flex tracking-tight leading-tight text-5xl text-center mb-2 justify-center"
               style={font("Inter 600")}
             >
               {recipe.title}
