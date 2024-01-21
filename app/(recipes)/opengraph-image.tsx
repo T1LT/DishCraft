@@ -2,8 +2,7 @@
 // export const revalidate = 60;
 
 // import { ImageResponse } from "next/og";
-// import { getStories, getStoriesCount } from "@/components/stories";
-// import { getRecipes }
+// import { getRecipes, getRecipesCount } from "./recipe-list";
 // import JSTimeAgo from "javascript-time-ago";
 // import en from "javascript-time-ago/locale/en";
 
