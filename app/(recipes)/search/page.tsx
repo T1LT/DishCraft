@@ -4,7 +4,7 @@ import RecipeList from "../recipe-list";
 import { headers as dynamic } from "next/headers";
 import z from "zod";
 import { notFound } from "next/navigation";
-import { RecipeListSkeleton } from "@/components/skeletons/recipes-skeleton";
+import RecipeListSkeleton from "@/components/skeletons/recipes-skeleton";
 
 const SearchParamsSchema = z.object({
   q: z.string().max(256).optional().default(""),

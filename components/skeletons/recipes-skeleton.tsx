@@ -19,7 +19,7 @@ export function RecipeCardSkeleton() {
   );
 }
 
-export function RecipeListSkeleton() {
+export default function RecipeListSkeleton() {
   return (
     <ul className="space-y-2">
       {Array.from({ length: 8 }, (_, idx) => (
@@ -28,16 +28,5 @@ export function RecipeListSkeleton() {
         </li>
       ))}
     </ul>
-  );
-}
-
-export default function RecipePageSkeleton() {
-  return (
-    <div className="w-full max-w-lg space-y-4">
-      <div className="flex justify-center">
-        <Skeleton className="h-[40px] w-[250px]" />
-      </div>
-      <RecipeListSkeleton />
-    </div>
   );
 }

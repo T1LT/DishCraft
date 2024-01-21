@@ -3,7 +3,7 @@ import RecipeList from "../recipe-list";
 import { headers as dynamic } from "next/headers";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { RecipeListSkeleton } from "@/components/skeletons/recipes-skeleton";
+import RecipeListSkeleton from "@/components/skeletons/recipes-skeleton";
 
 const SearchParamsSchema = z.object({
   p: z.coerce.number().min(1).max(100).optional().default(1),

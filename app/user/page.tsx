@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Heart, Upload } from "lucide-react";
 import { Suspense } from "react";
-import { RecipeListSkeleton } from "@/components/skeletons/recipes-skeleton";
+import RecipeListSkeleton from "@/components/skeletons/recipes-skeleton";
 
 async function getSubmittedRecipes(userId: string) {
   return await db
