@@ -9,12 +9,15 @@ import { buttonVariants } from "./ui/button";
 export function NextLink({
   page,
   dir,
+  q,
 }: {
   page: number;
   dir: "Next" | "Previous";
+  q: string | null;
 }) {
   const pathname = usePathname();
   const params = new URLSearchParams({
+    ...(q === null ? {} : { q }),
     ...(page > 1 ? { p: page.toString() } : {}),
   }).toString();
 
