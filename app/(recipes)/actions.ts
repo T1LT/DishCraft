@@ -235,40 +235,6 @@ export async function changeLike(
   revalidatePath(`/${recipeId.replace("_", "/")}`);
 }
 
-export async function getRecipes(filter: "all" | "popular") {
-  if (filter === "all") {
-    const recipes = await db
-      .select({
-        id: recipesTable.id,
-        title: recipesTable.title,
-        cuisine: recipesTable.cuisine,
-        category: recipesTable.category,
-        username: recipesTable.username,
-        prepTime: recipesTable.prepTime,
-        image_url: recipesTable.image_url,
-        likes: recipesTable.likes,
-      })
-      .from(recipesTable)
-      .orderBy(desc(recipesTable.created_at));
-    return recipes;
-  } else if (filter === "popular") {
-    const popularRecipes = await db
-      .select({
-        id: recipesTable.id,
-        title: recipesTable.title,
-        cuisine: recipesTable.cuisine,
-        category: recipesTable.category,
-        username: recipesTable.username,
-        prepTime: recipesTable.prepTime,
-        image_url: recipesTable.image_url,
-        likes: recipesTable.likes,
-      })
-      .from(recipesTable)
-      .orderBy(desc(recipesTable.likes));
-    return popularRecipes;
-  }
-}
-
 export async function getRecipe(id: string) {
   const recipeId = `recipe_${id}`;
   return (
