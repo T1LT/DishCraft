@@ -1,5 +1,19 @@
 import Navbar from "@/components/navbar";
 
+export const metadata = {
+  openGraph: {
+    title: "DishCraft",
+    url: "https://dishcraft.vercel.app",
+    siteName: "DishCraft",
+  },
+  twitter: {
+    title: "DishCraft",
+    card: "summary_large_image",
+    site: "@T1LTdev",
+    creator: "@T1LTdev",
+  },
+};
+
 export default function RecipesLayout({
   children,
 }: {

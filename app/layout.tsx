@@ -11,9 +11,9 @@ const jetbrains_mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://dishcraft.vercel.app"),
   title: "DishCraft",
   description: "Your one stop store for Recipes. Built for developers.",
+  metadataBase: new URL("https://dishcraft.vercel.app"),
 };
 
 export default function RootLayout({
