@@ -76,6 +76,7 @@ export default function Navbar() {
             <li>
               <Link
                 href="/search"
+                prefetch={true}
                 className="flex items-center gap-2 hover:underline underline-offset-4"
               >
                 <Search className="h-5 w-5" />
@@ -129,7 +130,7 @@ export default function Navbar() {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href="/search" className="w-full">
+              <Link href="/search" prefetch={true} className="w-full">
                 Search
               </Link>
             </DropdownMenuItem>
