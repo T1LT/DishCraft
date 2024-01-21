@@ -27,7 +27,7 @@ Desktop Speed Insights
 Used Partial Pre-Rendering, App Router, Server Actions, and React Server Components in Next.js.
 
 ### Development
-* Fork and clone the repo using `git clone https://github.com/T1LT/DishCraft.git`
+* Fork and clone the repo using `git clone`
 * Install the packages using `npm i`
 * Add environment variables as specified in the `.env.example` file.
 * Make sure `?sslmode=required` is at the end of the `POSTGRES_URL` env variable.
