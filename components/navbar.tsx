@@ -1,4 +1,12 @@
-import { Donut, Flame, Menu, Pizza, Plus, UserCircle2 } from "lucide-react";
+import {
+  Donut,
+  Flame,
+  Menu,
+  Pizza,
+  Plus,
+  Search,
+  UserCircle2,
+} from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
@@ -67,6 +75,16 @@ export default function Navbar() {
             <li className="font-light select-none">|</li>
             <li>
               <Link
+                href="/search"
+                className="flex items-center gap-2 hover:underline underline-offset-4"
+              >
+                <Search className="h-5 w-5" />
+                Search
+              </Link>
+            </li>
+            <li className="font-light select-none">|</li>
+            <li>
+              <Link
                 href="/user"
                 prefetch={true}
                 className="flex items-center gap-2 hover:underline underline-offset-4"
@@ -108,6 +126,11 @@ export default function Navbar() {
             <DropdownMenuItem asChild>
               <Link href="/add" className="w-full">
                 Add a Recipe
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/search" className="w-full">
+                Search
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
