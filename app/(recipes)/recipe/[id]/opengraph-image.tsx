@@ -55,14 +55,14 @@ export default async function MainOG({
               dishcraft.vercel.app
             </div>
           </div>
-          <div tw="p-4 flex flex-col justify-center items-center w-full">
+          <div tw="p-8 flex flex-col justify-center items-center w-full">
             <h3
-              tw="flex tracking-tight leading-tight text-7xl text-center mb-2 justify-center"
+              tw="flex tracking-tight leading-tight text-6xl text-center mb-2 justify-center"
               style={font("Inter 600")}
             >
               {recipe.title}
             </h3>
-            <p tw="flex text-gray-600 text-5xl items-center justify-center">
+            <p tw="flex text-gray-600 text-4xl items-center justify-center">
               by {recipe.username}
             </p>
           </div>
