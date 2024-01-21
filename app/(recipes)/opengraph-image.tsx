@@ -3,7 +3,6 @@ export const revalidate = 60;
 
 import { ImageResponse } from "next/og";
 import { getRecipes, getRecipesCount } from "./recipe-list";
-import { Donut } from "lucide-react";
 
 const numberFormatter = new Intl.NumberFormat("en-US");
 
@@ -38,8 +37,23 @@ export default async function MainOG() {
         <div tw="flex flex-col justify-between h-full w-full">
           <div tw="p-4 pt-8 px-8 pb-0 flex flex-row items-center w-full text-3xl">
             <div tw="flex items-center gap-2">
-              <Donut style={{ height: "1.5rem", width: "1.5rem" }} />
-              <h1 tw="text-2xl font-bold select-none">DishCraft</h1>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20.5 10a2.5 2.5 0 0 1-2.4-3H18a2.95 2.95 0 0 1-2.6-4.4 10 10 0 1 0 6.3 7.1c-.3.2-.8.3-1.2.3" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+              <h1 tw="text-2xl select-none" style={font("Inter 600")}>
+                DishCraft
+              </h1>
             </div>
 
             <div tw="flex items-center ml-auto text-gray-600">
@@ -47,7 +61,7 @@ export default async function MainOG() {
             </div>
           </div>
           <div tw="p-4 px-8 flex flex-col justify-center flex-1">
-            <ul tw="flex flex-col">
+            <ul tw="flex flex-col px-4">
               {recipes.map((recipe) => (
                 <li key={recipe.id} tw="text-3xl flex items-start mb-5">
                   <div tw="flex flex-col">
