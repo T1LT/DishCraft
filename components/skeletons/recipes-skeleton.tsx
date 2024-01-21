@@ -45,11 +45,13 @@ export function LayoutSkeleton() {
   return (
     <>
       <NavbarSkeleton />
-      <div className="w-full max-w-lg space-y-4">
-        <div className="flex justify-center">
-          <Skeleton className="h-[40px] w-[250px]" />
+      <div className="w-full flex justify-center px-4 py-12">
+        <div className="w-full max-w-lg space-y-4">
+          <div className="flex justify-center">
+            <Skeleton className="h-[40px] w-[250px]" />
+          </div>
+          <RecipeListSkeleton />
         </div>
-        <RecipeListSkeleton />
       </div>
     </>
   );
