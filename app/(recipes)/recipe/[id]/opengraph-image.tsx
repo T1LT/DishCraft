@@ -57,12 +57,12 @@ export default async function MainOG({
           </div>
           <div tw="p-4 flex flex-col justify-center items-center w-full">
             <h3
-              tw="flex tracking-tight leading-tight text-5xl text-center mb-2 justify-center"
+              tw="flex tracking-tight leading-tight text-7xl text-center mb-2 justify-center"
               style={font("Inter 600")}
             >
               {recipe.title}
             </h3>
-            <p tw="flex text-gray-600 text-3xl items-center justify-center">
+            <p tw="flex text-gray-600 text-5xl items-center justify-center">
               by {recipe.username}
             </p>
           </div>
@@ -75,7 +75,7 @@ export default async function MainOG({
                   year: "numeric",
                 })}
               </span>
-              <span>Likes: {recipe.likes}</span>
+              <span>{recipe.likes} Likes</span>
             </div>
           </div>
         </div>
