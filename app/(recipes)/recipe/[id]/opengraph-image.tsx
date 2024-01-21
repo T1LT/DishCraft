@@ -75,7 +75,9 @@ export default async function MainOG({
                   year: "numeric",
                 })}
               </span>
-              <span>{recipe.likes} Likes</span>
+              <span>
+                {recipe.likes} Like{recipe.likes !== 1 ? <span>s</span> : null}
+              </span>
             </div>
           </div>
         </div>
