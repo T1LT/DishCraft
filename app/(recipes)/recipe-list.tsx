@@ -8,7 +8,7 @@ import { NextLink } from "@/components/pagination-link";
 import { Suspense } from "react";
 import clsx from "clsx";
 
-const PER_PAGE = 20;
+const PER_PAGE = 10;
 
 function recipesWhere(q: string | null) {
   return q != null && q.length
