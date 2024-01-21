@@ -32,6 +32,7 @@ Used Partial Pre-Rendering, App Router, Server Actions, and React Server Compone
 * Add environment variables as specified in the `.env.example` file.
 * Make sure `?sslmode=required` is at the end of the `POSTGRES_URL` env variable.
 * For database migrations, use `npx drizzle-kit generate:pg` and `npx drizzle-kit push:pg`
+* Run these migrations manually by using `npx drizzle-kit generate:pg --custom`: `CREATE EXTENSION IF NOT EXISTS pg_trgm;`, `CREATE INDEX IF NOT EXISTS trgm_idx ON recipes USING GIN (title gin_trgm_ops, cuisine gin_trgm_ops, category gin_trgm_ops);`
 
 ### Deployment
 * Make sure the Vercel project is connected to a Vercel Postgres (Neon) database.
