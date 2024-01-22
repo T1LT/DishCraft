@@ -14,7 +14,7 @@ export default function NotFound() {
         Page Not Found
         <Ghost className="h-8 w-8 font-medium" />
       </h1>
-      <p className="text-lg">You seem lost. Want to go home?</p>
+      <p className="text-lg">You seem lost. Want to go back?</p>
       <Button onClick={() => router.back()}>Return To Deliciousness</Button>
     </div>
   );
