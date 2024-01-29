@@ -100,7 +100,7 @@ export default function Navbar() {
           <AuthNav />
         </Suspense>
 
-        <div className="flex gap-4">
+        <div className="flex gap-4 lg:hidden">
           <Link href="/search" prefetch={true}>
             <Search className="h-5 w-5" aria-label="Link to search page" />
           </Link>
