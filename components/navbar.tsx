@@ -100,59 +100,61 @@ export default function Navbar() {
           <AuthNav />
         </Suspense>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            className="flex lg:hidden"
-            aria-label="Open navigation dropdown"
-          >
-            <Menu className="h-5 w-5" />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>
-              <Suspense fallback={<h1>Hello There!</h1>}>
-                <UsernameLabel />
-              </Suspense>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              <Link href="/" prefetch={true} className="w-full">
-                All Recipes
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="/popular" prefetch={true} className="w-full">
-                Popular Recipes
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="/add" className="w-full">
-                Add a Recipe
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
+        <div className="flex gap-4">
+          <Link href="/search" prefetch={true}>
+            <Search className="h-5 w-5" aria-label="Link to search page" />
+          </Link>
+          <DropdownMenu>
+            <DropdownMenuTrigger aria-label="Open navigation dropdown">
+              <Menu className="h-5 w-5" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>
+                <Suspense fallback={<h1>Hello There!</h1>}>
+                  <UsernameLabel />
+                </Suspense>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link href="/" prefetch={true} className="w-full">
+                  All Recipes
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/popular" prefetch={true} className="w-full">
+                  Popular Recipes
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/add" className="w-full">
+                  Add a Recipe
+                </Link>
+              </DropdownMenuItem>
+              {/* <DropdownMenuItem asChild>
               <Link href="/search" prefetch={true} className="w-full">
                 Search
               </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="/user" prefetch={true} className="w-full">
-                My Page
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Suspense
-                fallback={
-                  <Button variant="link" className="p-0 h-4">
-                    Log Out
-                  </Button>
-                }
-              >
-                <AuthNav type="dropdown" />
-              </Suspense>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+            </DropdownMenuItem> */}
+              <DropdownMenuItem asChild>
+                <Link href="/user" prefetch={true} className="w-full">
+                  My Page
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Suspense
+                  fallback={
+                    <Button variant="link" className="p-0 h-4">
+                      Log Out
+                    </Button>
+                  }
+                >
+                  <AuthNav type="dropdown" />
+                </Suspense>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
     </header>
   );
