@@ -130,11 +130,6 @@ export default function Navbar() {
                   Add a Recipe
                 </Link>
               </DropdownMenuItem>
-              {/* <DropdownMenuItem asChild>
-              <Link href="/search" prefetch={true} className="w-full">
-                Search
-              </Link>
-            </DropdownMenuItem> */}
               <DropdownMenuItem asChild>
                 <Link href="/user" prefetch={true} className="w-full">
                   My Page
