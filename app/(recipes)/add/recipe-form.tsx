@@ -40,7 +40,7 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
     <div className="space-y-4 py-1">
       <div className="flex flex-col flex-grow space-y-2 items-start">
         <label
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-foreground"
           htmlFor="title"
         >
           Title
@@ -62,7 +62,7 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
       ) : null}
       <div className="flex flex-col space-y-2 items-start">
         <label
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-foreground"
           htmlFor="cuisine"
         >
           Cuisine
@@ -83,7 +83,7 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
       ) : null}
       <div className="flex flex-col space-y-2 items-start">
         <label
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-foreground"
           htmlFor="category"
         >
           Category
@@ -104,7 +104,7 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
       ) : null}
       <div className="flex flex-col space-y-2 items-start">
         <label
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-foreground"
           htmlFor="image"
         >
           Image (optional)
@@ -125,7 +125,7 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
       ) : null}
       <div className="flex flex-col space-y-2 items-start">
         <label
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-foreground"
           htmlFor="prepTime"
         >
           Prep Time (min)
@@ -147,14 +147,14 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
       <div className="flex flex-col space-y-2 items-start">
         <div className="w-full flex justify-between">
           <label
-            className="flex items-center gap-1 text-sm font-medium text-gray-700"
+            className="flex items-center gap-1 text-sm font-medium text-foreground"
             htmlFor="ingredients"
           >
             Ingredients
             <TooltipProvider delayDuration={200}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Info className="h-4 w-4 cursor-pointer" />
+                  <Info className="h-4 w-4 cursor-pointer hidden lg:block" />
                 </TooltipTrigger>
                 <TooltipContent className="text-center">
                   <p>Markdown is supported!</p>
@@ -163,7 +163,7 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
               </Tooltip>
             </TooltipProvider>
           </label>
-          <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
+          <div className="flex items-center gap-2 text-sm font-medium text-foreground">
             <label htmlFor="ingredients-preview">Preview</label>
             <Switch
               id="ingredients-preview"
@@ -179,7 +179,7 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
         <div
           className={clsx(
             "w-full px-3 py-2 border rounded-md !text-sm",
-            ingredientsPreviewToggle ? "block" : "hidden",
+            ingredientsPreviewToggle ? "block" : "hidden"
           )}
         >
           <MarkdownRenderer>{ingredientsInput}</MarkdownRenderer>
@@ -203,14 +203,14 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
       <div className="flex flex-col space-y-2 items-start">
         <div className="w-full flex justify-between">
           <label
-            className="flex items-center gap-1 text-sm font-medium text-gray-700"
+            className="flex items-center gap-1 text-sm font-medium text-foreground"
             htmlFor="procedure"
           >
             Procedure
             <TooltipProvider delayDuration={200}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Info className="h-4 w-4 cursor-pointer" />
+                  <Info className="h-4 w-4 cursor-pointer hidden lg:block" />
                 </TooltipTrigger>
                 <TooltipContent className="text-center">
                   <p>Markdown is supported!</p>
@@ -219,7 +219,7 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
               </Tooltip>
             </TooltipProvider>
           </label>
-          <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
+          <div className="flex items-center gap-2 text-sm font-medium text-foreground">
             <label htmlFor="procedure-preview">Preview</label>
             <Switch
               id="procedure-preview"
@@ -233,7 +233,7 @@ export function RecipeFormFields({ error }: SubmitRecipeData) {
         <div
           className={clsx(
             "w-full px-3 py-2 border rounded-md !text-sm",
-            procedurePreviewToggle ? "block" : "hidden",
+            procedurePreviewToggle ? "block" : "hidden"
           )}
         >
           <MarkdownRenderer>{procedureInput}</MarkdownRenderer>

@@ -19,11 +19,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { AddLink, AuthNav, UsernameLabel } from "@/app/(auth)/auth-nav";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Navbar() {
   return (
     <header className="w-full px-4 flex justify-center sticky top-4">
-      <div className="z-10 h-[74px] max-w-5xl w-full py-4 px-6 flex justify-between lg:grid grid-cols-6 place-items-center text-sm rounded-full backdrop-filter bg-white/40 backdrop-blur border">
+      <div className="z-10 h-[74px] max-w-5xl w-full py-4 pl-6 pr-6 lg:pr-0 flex justify-between lg:grid grid-cols-6 place-items-center text-sm rounded-full backdrop-filter bg-background/40 backdrop-blur border">
         <Link
           href="/"
           className="col-span-2 lg:col-span-1 w-full flex justify-start"
@@ -96,8 +97,12 @@ export default function Navbar() {
             </li>
           </ul>
         </nav>
+
         <Suspense fallback={null}>
-          <AuthNav />
+          <div className="flex items-center justify-end">
+            <ThemeToggle />
+            <AuthNav />
+          </div>
         </Suspense>
 
         <div className="flex gap-4 lg:hidden">

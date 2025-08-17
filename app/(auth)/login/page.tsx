@@ -22,10 +22,10 @@ export function LoginPage({ next }: { next?: string }) {
     <main className="w-full max-w-md p-8 border rounded-md shadow-sm">
       <div className="flex justify-center items-center gap-1.5 mb-4">
         <Donut className="w-5 h-5" />
-        <h1 className="text-lg font-bold text-gray-800">DishCraft</h1>
+        <h1 className="text-lg font-bold text-foreground">DishCraft</h1>
       </div>
 
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Login</h2>
+      <h2 className="text-2xl font-bold mb-4 text-foreground">Login</h2>
       <SignInForm next={next} />
 
       <div className="mt-2 w-full">
@@ -41,7 +41,7 @@ export function LoginPage({ next }: { next?: string }) {
       <div className="mt-3">
         <span className="text-sm text-muted-foreground">
           Don&apos;t have an account?{" "}
-          <Link href="/signup" className="underline text-black">
+          <Link href="/signup" className="underline text-foreground">
             Sign Up
           </Link>
         </span>
@@ -78,7 +78,10 @@ function SignInFormFields({ error }: SignInActionData) {
   return (
     <div className="space-y-3">
       <div className="space-y-2">
-        <label className="block text-gray-700 mb-1 text-sm" htmlFor="username">
+        <label
+          className="block text-foreground mb-1 text-sm"
+          htmlFor="username"
+        >
           Username
         </label>
         <Input
@@ -95,7 +98,10 @@ function SignInFormFields({ error }: SignInActionData) {
         />
       </div>
       <div className="space-y-2 relative">
-        <label className="block text-gray-700 mb-1 text-sm" htmlFor="password">
+        <label
+          className="block text-foreground mb-1 text-sm"
+          htmlFor="password"
+        >
           Password
         </label>
         <Input
@@ -110,13 +116,13 @@ function SignInFormFields({ error }: SignInActionData) {
         {showPassword ? (
           <EyeOff
             onClick={() => setShowPassword((prev) => !prev)}
-            className="text-gray-700 h-5 w-5 absolute right-2 top-[2.125rem] cursor-pointer"
+            className="text-foreground h-5 w-5 absolute right-2 top-[1.9rem] cursor-pointer"
             aria-label="hide password"
           />
         ) : (
           <Eye
             onClick={() => setShowPassword((prev) => !prev)}
-            className="text-gray-700 h-5 w-5 absolute right-2 top-[2.125rem] cursor-pointer"
+            className="text-foreground h-5 w-5 absolute right-2 top-[1.9rem] cursor-pointer"
             aria-label="show password"
           />
         )}
