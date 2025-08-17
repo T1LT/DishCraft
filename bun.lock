@@ -30,6 +30,7 @@
         "nanoid-dictionary": "^4.3.0",
         "next": "^14.0.5-canary.56",
         "next-auth": "^5.0.0-beta.4",
+        "next-themes": "^0.4.6",
         "react": "^18",
         "react-dom": "^18",
         "tailwind-merge": "^2.2.0",
@@ -818,6 +819,8 @@
     "next": ["next@14.0.5-canary.56", "", { "dependencies": { "@next/env": "14.0.5-canary.56", "@swc/helpers": "0.5.2", "busboy": "1.6.0", "caniuse-lite": "^1.0.30001406", "graceful-fs": "^4.2.11", "postcss": "8.4.31", "styled-jsx": "5.1.1" }, "optionalDependencies": { "@next/swc-darwin-arm64": "14.0.5-canary.56", "@next/swc-darwin-x64": "14.0.5-canary.56", "@next/swc-linux-arm64-gnu": "14.0.5-canary.56", "@next/swc-linux-arm64-musl": "14.0.5-canary.56", "@next/swc-linux-x64-gnu": "14.0.5-canary.56", "@next/swc-linux-x64-musl": "14.0.5-canary.56", "@next/swc-win32-arm64-msvc": "14.0.5-canary.56", "@next/swc-win32-ia32-msvc": "14.0.5-canary.56", "@next/swc-win32-x64-msvc": "14.0.5-canary.56" }, "peerDependencies": { "@opentelemetry/api": "^1.1.0", "react": "^18.2.0", "react-dom": "^18.2.0", "sass": "^1.3.0" }, "optionalPeers": ["@opentelemetry/api", "sass"], "bin": "dist/bin/next" }, "sha512-7CVdOI+q7rdGcr5flmrOwzjKIb/0sIESp4yUYw55KzrVOYSvhTC+FFMsMhdn9w9LgLfKfjR0eEtXFIUhjoV/7w=="],
 
     "next-auth": ["next-auth@5.0.0-beta.4", "", { "dependencies": { "@auth/core": "0.18.4" }, "peerDependencies": { "next": "^14", "nodemailer": "^6.6.5", "react": "^18.2.0" }, "optionalPeers": ["nodemailer"] }, "sha512-vgocjvwPA8gxd/zrIP/vr9lJ/HeNe+C56lPP1D3sdyenHt8KncQV6ro7q0xCsDp1fcOKx7WAWVZH5o8aMxDzgw=="],
+
+    "next-themes": ["next-themes@0.4.6", "", { "peerDependencies": { "react": "^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc", "react-dom": "^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc" } }, "sha512-pZvgD5L0IEvX5/9GWyHMf3m8BKiVQwsCMHfoFosXtXBMnaS0ZnIJ9ST4b4NqLVKDEm8QBxoNNGNaBv2JNF6XNA=="],
 
     "next-tick": ["next-tick@1.1.0", "", {}, "sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ=="],
 

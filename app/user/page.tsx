@@ -75,11 +75,11 @@ export default async function UserPage() {
       <Tabs defaultValue="submitted" className="w-full">
         <TabsList className="w-full">
           <TabsTrigger value="submitted" className="w-full">
-            <Upload className="text-gray-700 h-4 w-4 mr-2" />
+            <Upload className="text-muted-foreground h-4 w-4 mr-2" />
             Submitted
           </TabsTrigger>
           <TabsTrigger value="liked" className="w-full">
-            <Heart className="text-gray-700 h-4 w-4 mr-2" />
+            <Heart className="text-muted-foreground h-4 w-4 mr-2" />
             Liked
           </TabsTrigger>
         </TabsList>

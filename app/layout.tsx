@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "@/components/ui/toaster";
 import { LayoutSkeleton } from "@/components/skeletons/recipes-skeleton";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrains_mono = JetBrains_Mono({
@@ -24,13 +25,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${inter.className} ${jetbrains_mono.variable} overflow-y-scroll`}
       >
-        <Suspense fallback={<LayoutSkeleton />}>{children}</Suspense>
-        <Toaster />
-        <Analytics />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Suspense fallback={<LayoutSkeleton />}>{children}</Suspense>
+          <Toaster />
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   );
