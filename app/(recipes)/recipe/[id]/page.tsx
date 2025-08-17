@@ -95,7 +95,7 @@ export default async function RecipeItem({
           </p>
         </div>
         <div className="h-full flex items-center gap-2">
-          <ShareButton />
+          <ShareButton recipe={recipe} />
           <LikeButton
             likes={recipe.likes}
             recipeId={recipe.id}

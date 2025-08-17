@@ -14,7 +14,23 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ShareButton() {
+type RecipeType = {
+  title: string;
+  id: string;
+  likes: number;
+  image_url: string | null;
+  cuisine: string;
+  category: string;
+  prepTime: number;
+  ingredients: string;
+  procedure: string;
+  username: string | null;
+  submitted_by: string | null;
+  created_at: Date;
+  updated_at: Date;
+};
+
+export default function ShareButton({ recipe }: { recipe: RecipeType }) {
   const pathname = usePathname();
   const { toast } = useToast();
   const [isMobile, setIsMobile] = useState(false);
@@ -36,7 +52,9 @@ export default function ShareButton() {
     setIsMobile(isMobileDevice && hasNativeSharing);
   }, []);
 
-  const shareUrl = `https://dishcraft.vercel.app${pathname}`;
+  const shareUrl = `https://dishcraft.vercel.app/${recipe.id.replace("_", "/")}`;
+  const shareTitle = `Check out ${recipe.title} by ${recipe.username} on DishCraft`;
+  const encodedShareTitle = encodeURIComponent(`${shareTitle}: ${shareUrl}`);
 
   async function copyLink() {
     try {
@@ -52,12 +70,13 @@ export default function ShareButton() {
     if (isMobile) {
       try {
         await navigator.share({
-          title: "Check out this recipe!",
+          title: shareTitle,
           url: shareUrl,
         });
       } catch (error) {
-        // Fallback to dialog if sharing is cancelled or fails
-        setIsOpen(true);
+        // On mobile, don't show dialog - just silently fail
+        // This ensures only native sharing is used on mobile
+        console.log("Native sharing failed or was cancelled");
       }
     } else {
       setIsOpen(true);
@@ -94,7 +113,7 @@ export default function ShareButton() {
                 asChild
               >
                 <Link
-                  href={`https://wa.me/?text=${encodeURIComponent(`Check out this recipe: ${shareUrl}`)}`}
+                  href={`https://wa.me/?text=${encodedShareTitle}`}
                   target="_blank"
                 >
                   <Image
@@ -114,7 +133,7 @@ export default function ShareButton() {
                 asChild
               >
                 <Link
-                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out this recipe: ${shareUrl}`)}`}
+                  href={`https://twitter.com/intent/tweet?text=${encodedShareTitle}`}
                   target="_blank"
                 >
                   <Image
@@ -134,7 +153,7 @@ export default function ShareButton() {
                 asChild
               >
                 <Link
-                  href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
+                  href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}
                   target="_blank"
                 >
                   <Image
