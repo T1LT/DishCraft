@@ -61,7 +61,7 @@ const SubmitRecipeSchema = z.object({
     .refine((file) => file?.size <= MAX_FILE_SIZE, `Max file size is 4MB.`)
     .refine(
       (file) => !file.size || ACCEPTED_IMAGE_TYPES.includes(file?.type),
-      ".jpg, .jpeg, .png and .webp files are accepted.",
+      ".jpg, .jpeg, .png and .webp files are accepted."
     )
     .optional(),
 });
@@ -86,7 +86,7 @@ export type SubmitRecipeData = {
 
 export async function submitRecipe(
   _prevState: any,
-  formData: FormData,
+  formData: FormData
 ): Promise<SubmitRecipeData | void> {
   const session = await auth();
 
@@ -99,6 +99,7 @@ export async function submitRecipe(
       .select({
         id: usersTable.id,
         username: usersTable.username,
+        name: usersTable.name,
       })
       .from(usersTable)
       .where(eq(usersTable.id, userId))
@@ -159,7 +160,7 @@ export async function submitRecipe(
       image_url: blob ? (blob.url as string) : null,
       likes: 0,
       submitted_by: userId,
-      username: user.username,
+      username: user.username ?? user.name,
     });
   } catch (err) {
     console.error(err);
@@ -177,7 +178,7 @@ export async function submitRecipe(
 export async function changeLike(
   recipeId: string,
   likes: number,
-  userLiked: boolean,
+  userLiked: boolean
 ) {
   const session = await auth();
 
@@ -292,7 +293,7 @@ export async function editRecipe(
   recipeId: string,
   submittedBy: string | null,
   _prevState: any,
-  formData: FormData,
+  formData: FormData
 ): Promise<SubmitRecipeData | void> {
   const session = await auth();
 
