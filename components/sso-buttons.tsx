@@ -10,9 +10,9 @@ export default function SSOButtons() {
   return (
     <div className="w-full mt-4">
       <div className="flex items-center gap-2 mb-4">
-        <hr className="flex-1 border-gray-300" />
-        <span className="text-xs text-gray-500">OR</span>
-        <hr className="flex-1 border-gray-300" />
+        <hr className="flex-1 border-muted-foreground" />
+        <span className="text-xs text-muted-foreground">OR</span>
+        <hr className="flex-1 border-muted-foreground" />
       </div>
 
       <Button
