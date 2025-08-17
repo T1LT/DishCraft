@@ -1,5 +1,6 @@
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import Google from "next-auth/providers/google";
 import { db, usersTable } from "./db";
 import { compare } from "bcrypt";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
@@ -27,19 +28,24 @@ const authOptions: NextAuthConfig = {
       },
       authorize,
     }),
+    Google({
+      allowDangerousEmailAccountLinking: true,
+    }),
   ],
 };
 
 async function authorize(
   credentials: Partial<Record<"username" | "password", unknown>>,
-  req: Request,
+  req: Request
 ) {
   if (!credentials?.username) {
-    throw new Error('"username" is required in credentials');
+    // throw new Error('"username" is required in credentials');
+    return null;
   }
 
   if (!credentials?.password || "string" !== typeof credentials.password) {
-    throw new Error('"password" is required in credentials');
+    // throw new Error('"password" is required in credentials');
+    return null;
   }
 
   const reqId = req.headers.get("x-vercel-id") ?? nanoid();
@@ -53,7 +59,7 @@ async function authorize(
   )[0];
   console.timeEnd(`fetch user for login ${reqId}`);
 
-  if (!maybeUser) return null;
+  if (!maybeUser || !maybeUser.password) return null;
 
   console.time(`bcrypt ${reqId}`);
   if (!(await compare(credentials.password, maybeUser.password))) {
@@ -64,4 +70,4 @@ async function authorize(
   return { id: maybeUser.id };
 }
 
-export const { auth, signIn, signOut } = NextAuth(authOptions);
+export const { handlers, auth, signIn, signOut } = NextAuth(authOptions);

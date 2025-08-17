@@ -3,10 +3,11 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { signInAction, type SignInActionData } from "../actions";
-import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { Donut, Eye, EyeOff, Loader2 } from "lucide-react";
 import { useFormStatus, useFormState } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import SSOButtons from "@/components/sso-buttons";
 
 export default function Login() {
   return (
@@ -18,9 +19,19 @@ export default function Login() {
 
 export function LoginPage({ next }: { next?: string }) {
   return (
-    <main className="max-w-sm p-8 border rounded-md shadow-sm">
-      <h1 className="text-2xl font-bold mb-4 text-gray-800">Login</h1>
+    <main className="w-full max-w-md p-8 border rounded-md shadow-sm">
+      <div className="flex justify-center items-center gap-1.5 mb-4">
+        <Donut className="w-5 h-5" />
+        <h1 className="text-lg font-bold text-gray-800">DishCraft</h1>
+      </div>
+
+      <h2 className="text-2xl font-bold mb-4 text-gray-800">Login</h2>
       <SignInForm next={next} />
+
+      <div className="mt-2 w-full">
+        <SSOButtons />
+      </div>
+
       {/* TODO: IMPLEMENT FORGOT PASSWORD FLOW */}
       {/* <div className="mt-3">
         <span className="cursor-default" title="Unimplemented">
@@ -28,9 +39,9 @@ export function LoginPage({ next }: { next?: string }) {
         </span>
       </div> */}
       <div className="mt-3">
-        <span className="text-sm">
+        <span className="text-sm text-muted-foreground">
           Don&apos;t have an account?{" "}
-          <Link href="/signup" className="underline">
+          <Link href="/signup" className="underline text-black">
             Sign Up
           </Link>
         </span>
@@ -67,11 +78,11 @@ function SignInFormFields({ error }: SignInActionData) {
   return (
     <div className="space-y-3">
       <div className="space-y-2">
-        <label className="block text-gray-700 mb-1" htmlFor="username">
+        <label className="block text-gray-700 mb-1 text-sm" htmlFor="username">
           Username
         </label>
         <Input
-          className="w-full text-base"
+          className="w-full text-sm"
           autoFocus
           ref={inputRef}
           autoCapitalize="off"
@@ -84,11 +95,11 @@ function SignInFormFields({ error }: SignInActionData) {
         />
       </div>
       <div className="space-y-2 relative">
-        <label className="block text-gray-700 mb-1" htmlFor="password">
+        <label className="block text-gray-700 mb-1 text-sm" htmlFor="password">
           Password
         </label>
         <Input
-          className="w-full text-base pr-8"
+          className="w-full text-sm pr-8"
           id="password"
           type={showPassword ? "text" : "password"}
           name="password"
@@ -111,7 +122,8 @@ function SignInFormFields({ error }: SignInActionData) {
         )}
       </div>
       <div className="flex flex-col gap-3 items-start">
-        <Button className="p-0 h-8 px-4" disabled={pending}>
+        {/* <Button className="p-0 h-8 px-4" disabled={pending}> */}
+        <Button className="w-full" disabled={pending}>
           {pending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
           Login
         </Button>

@@ -3,10 +3,11 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { signUpAction, type SignUpActionData } from "../actions";
-import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { Donut, Eye, EyeOff, Loader2 } from "lucide-react";
 import { useFormStatus, useFormState } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import SSOButtons from "@/components/sso-buttons";
 
 export default function SignUp() {
   return (
@@ -18,13 +19,23 @@ export default function SignUp() {
 
 export function SignUpPage({ next }: { next?: string }) {
   return (
-    <main className="max-w-sm p-8 border rounded-md shadow-sm">
+    <main className="w-full max-w-md p-8 border rounded-md shadow-sm">
+      <div className="flex justify-center items-center gap-1.5 mb-4">
+        <Donut className="w-5 h-5" />
+        <h1 className="text-lg font-bold text-gray-800">DishCraft</h1>
+      </div>
+
       <h2 className="text-2xl font-bold mb-4 text-gray-800">Create Account</h2>
       <SignUpForm next={next} />
+
+      <div className="mt-2 w-full">
+        <SSOButtons />
+      </div>
+
       <div className="mt-3">
-        <span className="text-sm">
+        <span className="text-sm text-muted-foreground">
           Already have an account?{" "}
-          <Link href="/login" className="underline">
+          <Link href="/login" className="underline text-black">
             Login
           </Link>
         </span>
@@ -61,11 +72,14 @@ function SignUpFormFields({ error }: SignUpActionData) {
   return (
     <div className="space-y-3">
       <div className="space-y-2">
-        <label className="block text-gray-700 mb-1" htmlFor="new-username">
+        <label
+          className="block text-gray-700 mb-1 text-sm"
+          htmlFor="new-username"
+        >
           Username
         </label>
         <Input
-          className="w-full text-base"
+          className="w-full text-sm"
           autoFocus
           autoCapitalize="off"
           id="new-username"
@@ -85,11 +99,14 @@ function SignUpFormFields({ error }: SignUpActionData) {
         ) : null}
       </div>
       <div className="space-y-2 relative">
-        <label className="block text-gray-700 mb-1" htmlFor="new-password">
+        <label
+          className="block text-gray-700 mb-1 text-sm"
+          htmlFor="new-password"
+        >
           Password
         </label>
         <Input
-          className="w-full text-base pr-8"
+          className="w-full text-sm pr-8"
           id="new-password"
           name="password"
           type={showPassword ? "text" : "password"}
@@ -119,7 +136,8 @@ function SignUpFormFields({ error }: SignUpActionData) {
         ) : null}
       </div>
       <div className="flex flex-col gap-3 items-start">
-        <Button className="p-0 h-8 px-4" disabled={pending}>
+        {/* <Button className="p-0 h-8 px-4" disabled={pending}> */}
+        <Button className="w-full" disabled={pending}>
           {pending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
           Sign Up
         </Button>
